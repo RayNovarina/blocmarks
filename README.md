@@ -12,6 +12,17 @@ Blocmarks will solve these problems by organizing bookmarks by topic and making 
 User Stories
 
 As a user, I want to sign up for a free account by providing a user name, password and email 	2
+  Devise tutorial: http://www.sitepoint.com/devise-authentication-in-depth/
+  A new folder called devise will be created inside the views directory. Folders that are inside:
+
+    confirmations – This has a lone new.html.erb view that is being rendered when a user requests to resend the confirmation e-mail.
+    mailer – All the templates for emails are stored here.
+    passwords – Views with forms to request password, reset email, and actually change the password.
+    registrations – The new.html.erb view is rendered when a user registers on the site. edit.html.erb contains a form to update profile.
+    sessions – There is only one view, which is the login form for the site.
+    shared – Only one partial is present here, which contains links that are being displayed on each Devise’ page (like “Forgot your password?”, “Re-send confirmation email”, etc.)
+    unlocks – Only one view with a form to request an email with an unlock link.
+
 As a user, I want to sign in and out of Blocmarks 	2
 As a user, I want to email a URL to Blocmarks and have it saved in the Blocmarks database 	3
 As a user, I want to see an index of all topics and their bookmarks 	3

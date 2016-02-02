@@ -4,5 +4,5 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # Via Devise: redirect the user to the login page if they're not signed in:
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 end

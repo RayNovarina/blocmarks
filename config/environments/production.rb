@@ -91,7 +91,7 @@ Rails.application.configure do
   # config.action_mailer.delivery_method = nil
   # For ActionMailer to auto include :host when generating absolute urls.
   # config.action_mailer.default_url_options =
-  #  { host: 'obscure-island-3427.herokuapp.com' }
+  #  { host: 'mighty-waters-61717.herokuapp.com' }
   #
   # 2) heroku install of SendGrid email lib and Figaro gem to store
   # credentials in the production server environment.
@@ -100,7 +100,7 @@ Rails.application.configure do
   # Ref: 2.6 Generating URLs in Action Mailer Views at
   # http://guides.rubyonrails.org/action_mailer_basics.html
   config.action_mailer.default_url_options =
-    { host: 'obscure-island-3427.herokuapp.com' }
+    { host: 'mighty-waters-61717.herokuapp.com' }
   # For smtp server settings.
   # SendGrid email lib and credentials in the environment.
   config.action_mailer.delivery_method = :smtp

@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+ /* Bootstrap */
+ @import 'bootstrap-sprockets';
+ @import 'bootstrap';
+ @import 'bootstrap/theme';
+
+ /* Page alert messages. Modify class name so we can use the flash hash key name. */
+ .alert-alert {
+   @extend .alert-warning;
+ }
+
+ .alert-notice {
+   @extend .alert-info;
+ }

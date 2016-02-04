@@ -1,64 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- ==== Begin: HTML HEAD TAG === -->
   <meta charset="utf-8">
   <title>Blocmarks</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <!-- ==== End: HTML HEAD TAG === -->
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-  <div class="container">
-    <div class="navbar-header">
-      <%= link_to 'Blockmarks', root_path, class: 'navbar-brand' %>
-    </div>
-    <div id="navbar">
-      <ul class="nav navbar-nav">
-        <li><%= link_to 'Home', root_path %></li>
-      </ul>
-      <ul class="nav navbar-nav pull-right">
-        <% if user_signed_in? %>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <%= current_user.name %>
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <li><%= link_to 'Profile', edit_user_registration_path %></li>
-              <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-            </ul>
-          </li>
-        <% else %>
-          <li><%= link_to 'Log In', new_user_session_path %></li>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-</nav>
 
-<div class="container">
-  <% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>">
-      <%= value %>
-    </div>
-  <% end %>
-</div>
-
-<%= yield :page_top_content %>
-
-<div class="container">
-  <h1><%= yield :page_header %></h1>
-
-  <%= yield %>
-</div>
-
-<div id="footer">
-  <div class="container">
-    <p class="text-muted">Created by <a href="https://cdn-photos.bloc.io/medium/2317655/photo.JPG?1450380571" target="_blank">A student at Block.io</a></p>
-  </div>
-</div>
+<% # ===== Blocmarks Page LAYOUT: ====   %>
+<% # Note: default/global content can be override via content_for/yeild hooks %>
+<% #------------------------------------------------------- %>
+<% # Section0: (CSS: doc#header) -Global- %>
+  <% # <header> Page Header  %>
+  <%= render 'layouts/page_header' %>
+   <% # <nav> Page Header navigation  %>
+<% #------------------------------------------------------- %>
+<% # Section1: (CSS: doc#main) -Global- %>
+  <% # <main> Page Content  %>
+  <%= render 'layouts/page_main' %>
+    <% #---------------------------------- %>
+    <% # <header> Page Main Content Header  %>
+      <% # <section> Page Main Content messages -Global-  %>
+    <% #---------------------------------- %>
+    <% # <main> Page Main Content Body -Global- %>
+      <% # <header> Page Main Content Body Header -Optional-  %>
+        <% # <nav> Page Main Content navigation  %>
+      <% # <main> Page Main Content Body -Optional- %>
+      <% # <footer> Page Main Content Footer -Optional- %>
+        <% # <nav> Page Main Content navigation  %>
+    <% #---------------------------------- %>
+    <% # <footer> Page Main Content Footer -Optional- %>
+      <% # <nav> Page Main Content navigation  %>
+<% #------------------------------------------------------- %>
+<% # Section2: (CSS: doc#footer) Global %>
+  <% # <footer> Page Footer %>
+  <%= render 'layouts/page_footer' %>
+    <% # <nav> Page Footer navigation  %>
 
 </body>
 </html>

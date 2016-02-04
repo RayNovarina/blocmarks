@@ -1,12 +1,10 @@
-<% content_for :page_top_content do %>
-  <div class="jumbotron">
+<div class="page_welcome_index">
+<% content_for :page_main do %>
     <div class="container">
       <h1>Welcome!</h1>
-      <p>Blocmarks is a resource for saving and sharing bookmarks</p>
-      <p>
-      <p>
-        <%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %> to get started.
-      </p>
+      <p>Blocmarks is a resource for saving and sharing bookmarks simply via email.</p>
+      <p><%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %> to get started.</p>
+      <p><h4><%= link_to 'Learn More', '' %></p></h4>
     </div>
 
     <br><br><br>
@@ -31,5 +29,5 @@
       </div>
     </div>
   </div>
-</div>
 <% end %>
+</div>

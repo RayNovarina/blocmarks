@@ -1,0 +1,28 @@
+<!-- # ======== Begin: PAGE HEADER -global- ========== -->
+<header class="content_for_page_header">
+  <!-- # == Begin: Page Header Navigation - Navbar, inverse == -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <% if content_for?(:override_page_header_navbar) %>
+      <!-- # == Begin: Page Header Navbar override == -->
+      <%= yield :override_page_header_navbar %>
+      <!-- # == End: Page Header Navbar override == -->
+    <% else %>
+      <div class="navbar-header">
+        <%= link_to 'Blockmarks', root_path, class: 'navbar-brand' %>
+      </div>
+      <div id="navbar">
+        <ul class="nav navbar-nav">
+          <li><%= link_to 'Home', root_path %></li>
+        </ul>
+        <ul class="nav navbar-nav pull-right">
+          <li><%= link_to 'Log In', new_user_session_path %></li>
+          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+  </nav>
+  <!-- # ======== End: Page Header Navigation == -->
+</header>
+<!-- # ======== End: PAGE HEADER -global- ========== -->

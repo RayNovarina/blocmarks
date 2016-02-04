@@ -18,7 +18,7 @@
  @import 'bootstrap';
  @import 'bootstrap/theme';
 
- /* Page alert messages. Modify class name so we can use the flash hash key name. */
+ /* Page alert messages. Modify class name so we can use the flash hash key name.
  .alert-alert {
    @extend .alert-warning;
  }
@@ -26,3 +26,22 @@
  .alert-notice {
    @extend .alert-info;
  }
+*/
+
+.main_body_content_header.container {
+  h2 { /* page_title */
+      padding-bottom: 20px;
+  }
+}
+
+/* /view/devise/..... */
+.views_devise { /* /views/devise/.... .new_user for /registrations/new.html.erb  */
+                /*                    .edit_user for /reg.../edit.html.erb  */
+  .field {  /* form fields */
+          margin-bottom: 6px;
+  }
+  .actions { /* form action button */
+          margin-top: 14px;
+          margin-bottom: 8px;
+  }
+}

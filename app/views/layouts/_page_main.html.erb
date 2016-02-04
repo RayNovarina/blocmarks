@@ -1,0 +1,94 @@
+
+<!-- # ======= Begin: PAGE MAIN -global- ===== -->
+<main class="content_for_page_main">
+  <!-- # == Begin: PAGE MAIN HEADER -global- -->
+  <header>
+    <!-- # == Begin: PAGE MAIN HEADER messages -global- -->
+    <section>
+    <div class="container">
+      <!-- Render Flash messages -->
+      <%= render 'layouts/page_main_header_flash_messages' %>
+      <!-- Optional: Other general messages. -->
+      <% if content_for?(:page_main_header_other_messages) %>
+        <!-- # == Begin: yield :Page Header Other Messages == -->
+        <%= yield :page_main_header_other_messages %>
+        <!-- # == End: yield :Page Header Other Messages == -->
+      <% end %>
+    </div>
+  </section>
+  <!-- # == End: PAGE MAIN HEADER messages -global- -->
+  </header>
+  <!-- # == End: PAGE MAIN HEADER -global- -->
+
+  <!-- # == Begin: PAGE MAIN BODY -Global- -->
+  <main class="content_for_page_main_body">
+    <!-- # == Begin: PAGE MAIN BODY container - Jumbotron == -->
+    <div class="jumbotron">
+      <!-- # <header> Page Main Body Header: Page title and top nav. -Optional- -->
+      <% if content_for?(:page_main_body_header_title) || content_for?(:page_main_body_header_nav) %>
+        <!-- # == Begin: render :Page Main Body Header == -->
+        <%= render 'layouts/page_main_body_header' %>
+        <!-- # == End: render :Page Main Body Header == -->
+      <% end %>
+
+      <!-- # == Begin: PAGE MAIN BODY Content -Global- -->
+      <main>
+        <!-- # <header> Page Main Body Content Header: Content title and top nav. -Optional- -->
+        <% if content_for?(:page_title) ||
+              content_for?(:page_main_body_content_header_title) ||
+              content_for?(:page_main_body_content_header_nav) %>
+          <!-- # == Begin: render :Page Main Body Content Header == -->
+          <%= render 'layouts/page_main_body_content_header' %>
+          <!-- # == End: render :Page Main Body Content Header == -->
+        <% end %>
+
+        <!-- # <header> Page Main Body Content AtLast: -Global- -->
+        <main class="content_for_page_main_body_content_at_last">
+          <!-- # == Begin: Page Main Body Content AtLast container == -->
+          <% if content_for?(:page_main) ||
+                content_for?(:page_main_body_content_at_last) %>
+            <div class="container">
+              <!-- # == Begin: yield :Page Main Body Content AtLast == -->
+              <% if content_for?(:page_main_body_content_at_last) %>
+                <%= yield :page_main_body_content_at_last %>
+              <% else %>
+                <%= yield :page_main %>
+              <% end %>
+              <!-- # == End: yield :Page Main Body Content AtLast == -->
+            </div>
+          <% else %>
+            <!-- # *** NOTE: should only get here if content_for is not used in view. == -->
+            <div class="container alert-danger">
+              <!-- # == Begin: yield :Page Main Body Content AtLast -Default- == -->
+              <div><h2>Warning! content_for not being used.</h2></div>
+              <%= yield %>
+              <!-- # == End: yield :Page Main Body Content AtLast -Default- == -->
+            </div>
+          <% end %>
+        </main>
+        <!-- # == End: Page Main Body Content AtLast: -Global- -->
+      </main>
+      <!-- # == End: PAGE MAIN BODY Content -Global- -->
+
+    <!-- # <footer> Page Main Content Body Footer -Optional- -->
+    <% if content_for?(:page_main_body_footer) %>
+      <!-- # == Begin: yield :Page Main Content Body Footer == -->
+      <%= yield :page_main_body_footer %>
+      <!-- # == End: yield :Page Main Content Body Footer == -->
+    <% end %>
+
+  </div>
+  <!-- # == End: PAGE MAIN BODY container - Jumbotron == -->
+  </main>
+  <!-- # == End: PAGE MAIN BODY -Global- -->
+
+  <!-- # == Begin: PAGE MAIN FOOTER -optional- -->
+  <% if content_for?(:page_main_footer) %>
+    <!-- # == Begin: yield :Page Main Footer == -->
+    <%= yield :page_main_footer %>
+    <!-- # == End: yield :Page Main Content Footer == -->
+  <% end %>
+  <!-- # == End: PAGE MAIN FOOTER -optional- -->
+
+</main>
+<!-- # == End: PAGE MAIN -global- == -->

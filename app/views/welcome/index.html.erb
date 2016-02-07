@@ -1,2 +1,33 @@
-<h1>Blocmarks:</h1>
-<p>an application that allows a user to bookmark URLs via email, peruse other user's bookmarks and maintain a personal index of categorized bookmarks.</p>
+<div class="page_welcome_index">
+<% content_for :page_main do %>
+    <div class="container">
+      <h1>Welcome!</h1>
+      <p>Blocmarks is a resource for saving and sharing bookmarks simply via email.</p>
+      <p><%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %> to get started.</p>
+      <p><h4><%= link_to 'Learn More', '' %></p></h4>
+    </div>
+
+    <br><br><br>
+    <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Simple to add bookmarks</h2>
+        <p>Add bookmarks via Email. And other stuff, etc. Such as something.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h2>View others' bookmarks</h2>
+          <p>Forward their money and preferences to those in need, all over the
+             world.
+          </p>
+      </div>
+      <div class="col-md-4">
+        <h2>Create a private list</h2>
+          <p>You no longer need to hide your browser history from your family or
+             parole officer.
+          </p>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>

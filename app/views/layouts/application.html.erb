@@ -1,14 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- ==== Begin: HTML HEAD TAG === -->
+  <meta charset="utf-8">
   <title>Blocmarks</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <!-- ==== End: HTML HEAD TAG === -->
 </head>
 <body>
 
-<%= yield %>
+<% # ===== Blocmarks Page LAYOUT: ====   %>
+<% # Note: default/global content can be override via content_for/yeild hooks %>
+<% #------------------------------------------------------- %>
+<% # Section0: (CSS: doc#header) -Global- %>
+  <% # <header> Page Header  %>
+  <%= render 'layouts/page_header' %>
+   <% # <nav> Page Header navigation  %>
+<% #------------------------------------------------------- %>
+<% # Section1: (CSS: doc#main) -Global- %>
+  <% # <main> Page Content  %>
+  <%= render 'layouts/page_main' %>
+    <% #---------------------------------- %>
+    <% # <header> Page Main Content Header  %>
+      <% # <section> Page Main Content messages -Global-  %>
+    <% #---------------------------------- %>
+    <% # <main> Page Main Content Body -Global- %>
+      <% # <header> Page Main Content Body Header -Optional-  %>
+        <% # <nav> Page Main Content navigation  %>
+      <% # <main> Page Main Content Body -Optional- %>
+      <% # <footer> Page Main Content Footer -Optional- %>
+        <% # <nav> Page Main Content navigation  %>
+    <% #---------------------------------- %>
+    <% # <footer> Page Main Content Footer -Optional- %>
+      <% # <nav> Page Main Content navigation  %>
+<% #------------------------------------------------------- %>
+<% # Section2: (CSS: doc#footer) Global %>
+  <% # <footer> Page Footer %>
+  <%= render 'layouts/page_footer' %>
+    <% # <nav> Page Footer navigation  %>
 
 </body>
 </html>

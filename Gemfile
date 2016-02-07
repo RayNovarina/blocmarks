@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.2.1'
+
 #========== GLOBAL GEMS ======================
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -13,10 +15,15 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+# Use jquery turbolinks for bootstrap dropdown picklist
+gem 'jquery-turbolinks'
+# Use Devise authentication
+gem 'devise'
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+# gem 'bcrypt', '~> 3.1.7'
 # Use Twitter Bootstrap as CSS framework
 gem 'bootstrap-sass'
+
 # Use Figaro to store Sendgrid and Devise credentials as environment variables.
 #     Doc - Bloc: https://www.bloc.io/resources/environment-variables-with-figaro
 #     GitHub - https://github.com/laserlemon/figaro#give-me-an-example
@@ -41,7 +48,7 @@ group :development, :test do
   # To use: ??
   gem 'shoulda'
   # Rspec extension to generate Factory objects for tests.
-  gem 'factory_girl_rails', '~> 4.0'
+  # gem 'factory_girl_rails', '~> 4.0'
 end
 
 #=========== PRODUCTION only GEMS =================

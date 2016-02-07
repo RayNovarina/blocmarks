@@ -8,18 +8,8 @@
       <%= yield :override_page_header_navbar %>
       <!-- # == End: Page Header Navbar override == -->
     <% else %>
-      <div class="navbar-header">
-        <%= link_to 'Blockmarks', root_path, class: 'navbar-brand' %>
-      </div>
-      <div id="navbar">
-        <ul class="nav navbar-nav">
-          <li><%= link_to 'Home', root_path %></li>
-        </ul>
-        <ul class="nav navbar-nav pull-right">
-          <li><%= link_to 'Log In', new_user_session_path %></li>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-        </ul>
-      </div>
+    <%= render 'layouts/page_header_navbar_left' %>
+    <%= render 'layouts/page_header_navbar_right' %>
     <% end %>
   </div>
   </nav>

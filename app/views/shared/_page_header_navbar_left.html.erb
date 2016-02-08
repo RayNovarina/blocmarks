@@ -12,10 +12,17 @@
     <% else %>
           <li><%= link_to 'Home', root_path %></li>
     <% end %>
-    <% if current_page?(controller: 'topics', action: 'index') %>
-          <li><a class="navbar-no-href">Topics</a></li>
-    <% else %>
+    <% if current_page?(controller: 'devise/confirmations', action: 'new')  ||
+          current_page?(controller: 'devise/passwords',     action: 'new')  ||
+          current_page?(controller: 'devise/passwords',     action: 'edit') ||
+          current_page?(controller: 'devise/registrations', action: 'new')  ||
+          current_page?(controller: 'devise/registrations', action: 'edit') ||
+          current_page?(controller: 'devise/sessions',      action: 'new')  ||
+         !current_page?(controller: 'topics', action: 'index')
+    %>
           <li><%= link_to 'Topics', topics_path %></li>
+    <% else %>
+          <li><a class="navbar-no-href">Topics</a></li>
     <% end %>
   </ul>
 </div>

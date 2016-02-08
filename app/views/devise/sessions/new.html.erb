@@ -1,8 +1,5 @@
-<% content_for :page_title do %>
-   Log in
-<% end %>
+<h2>Log in</h2>
 
-<% content_for :page_main do %>
   <div class="views_devise">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
@@ -29,4 +26,3 @@
 
   <%= render 'devise/shared/links' %>
 </div>
-<% end %>

@@ -1,17 +1,19 @@
 <!-- # ======== Begin: PAGE HEADER -global- ========== -->
 <header class="content_for_page_header">
   <!-- # == Begin: Page Header Navigation - Navbar, inverse == -->
-  <nav class="navbar navbar-inverse">
-  <div class="container">
-    <% if content_for?(:override_page_header_navbar) %>
-      <!-- # == Begin: Page Header Navbar override == -->
-      <%= yield :override_page_header_navbar %>
-      <!-- # == End: Page Header Navbar override == -->
-    <% else %>
-    <%= render 'layouts/page_header_navbar_left' %>
-    <%= render 'layouts/page_header_navbar_right' %>
-    <% end %>
-  </div>
+  <nav>
+  <% if content_for?(:override_page_header_navbar) %>
+    <!-- # == Begin: Page Header Navbar override == -->
+    <%= yield :override_page_header_navbar %>
+    <!-- # == End: Page Header Navbar override == -->
+  <% else %>
+    <div class="navbar navbar-inverse">
+      <div class="container">
+        <%= render 'shared/page_header_navbar_left' %>
+        <%= render 'shared/page_header_navbar_right' %>
+      </div>
+    </div>
+  <% end %>
   </nav>
   <!-- # ======== End: Page Header Navigation == -->
 </header>

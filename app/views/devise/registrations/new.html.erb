@@ -1,9 +1,6 @@
-<% content_for :page_title do %>
-   Sign up
-<% end %>
+<h2>Sign up</h2>
 
-<% content_for :page_main do %>
-  <div class="views_devise">
+<div class="views_devise">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
 
@@ -32,4 +29,3 @@
 
   <%= render 'devise/shared/links' %>
 </div>
-<% end %>

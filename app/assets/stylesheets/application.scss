@@ -18,17 +18,7 @@
  @import 'bootstrap';
  @import 'bootstrap/theme';
 
- /* Page alert messages. Modify class name so we can use the flash hash key name.
- .alert-alert {
-   @extend .alert-warning;
- }
-
- .alert-notice {
-   @extend .alert-info;
- }
-*/
-
-.main_body_content_header.container {
+.page_main_body_container.container {
   h2 { /* page_title */
       padding-bottom: 20px;
   }

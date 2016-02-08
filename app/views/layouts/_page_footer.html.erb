@@ -5,7 +5,13 @@
   </header>
   <nav>
     <div class="container">
-      <p class="text-muted">Created by <a href="https://cdn-photos.bloc.io/medium/2317655/photo.JPG?1450380571" target="_blank">A student at Block.io</a></p>
+      <% if content_for?(:override_page_footer_nav) %>
+        <!-- # == Begin: Page Header Navbar override == -->
+        <%= yield :override_page_footer_nav %>
+        <!-- # == End: Page Header Navbar override == -->
+      <% else %>
+       <%= render 'shared/page_footer_nav' %>
+      <% end %>
     </div>
   </nav>
 </footer>

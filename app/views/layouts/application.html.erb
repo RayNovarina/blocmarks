@@ -11,7 +11,10 @@
 </head>
 <body>
 
+<% @view = @view || return_view_hash_of(params, {}) %>
+
 <% # ===== Blocmarks Page LAYOUT: ====   %>
+<div class="<%= @view[:page_name] %>">
 <% # Note: default/global content can be override via content_for/yeild hooks %>
 <% #------------------------------------------------------- %>
 <% # Section0: (CSS: doc#header) -Global- %>
@@ -40,6 +43,7 @@
   <% # <footer> Page Footer %>
   <%= render 'layouts/page_footer' %>
     <% # <nav> Page Footer navigation  %>
-
+<% #------------------------------------------------------- %>
+</div>
 </body>
 </html>

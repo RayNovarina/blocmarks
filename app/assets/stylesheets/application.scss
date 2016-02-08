@@ -18,6 +18,12 @@
  @import 'bootstrap';
  @import 'bootstrap/theme';
 
+/* We generate <a> without href to stop browser from refreshing page. But need
+   a mouse pointer for consistency. */
+ .navbar-no-href {
+   cursor:pointer;
+ }
+
 .page_main_body_container.container {
   h2 { /* page_title */
       padding-bottom: 20px;

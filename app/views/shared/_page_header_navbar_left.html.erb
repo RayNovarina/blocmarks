@@ -1,9 +1,21 @@
 <div class="navbar_left">
   <div class="navbar-header">
-    <%= link_to 'Blockmarks', root_path, class: 'navbar-brand' %>
+    <% if current_page?(:root) %>
+          <a class="navbar-brand navbar-no-href">Blocmarks</a>
+    <% else %>
+          <%= link_to 'Blocmarks', root_path, class: 'navbar-brand' %>
+    <% end %>
   </div>
   <ul class="nav navbar-nav">
-    <li><%= link_to 'Home', root_path %></li>
-    <li><%= link_to 'Topics', '' %></li>
+    <% if current_page?(:root) %>
+          <li><a class="navbar-no-href">Home</a></li>
+    <% else %>
+          <li><%= link_to 'Home', root_path %></li>
+    <% end %>
+    <% if current_page?(controller: 'topics', action: 'index') %>
+          <li><a class="navbar-no-href">Topics</a></li>
+    <% else %>
+          <li><%= link_to 'Topics', topics_path %></li>
+    <% end %>
   </ul>
 </div>

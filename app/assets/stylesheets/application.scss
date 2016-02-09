@@ -13,10 +13,14 @@
  *= require_tree .
  *= require_self
  */
- /* Bootstrap */
- @import 'bootstrap-sprockets';
- @import 'bootstrap';
- @import 'bootstrap/theme';
+@import "bootstrap-sprockets";
+@import "bootstrap";
+ /*----------------------------------------------------
+
+/*============== Global app css =========================
+* For controller/app page specific css see
+* /assets/stylesheets/<controllerName>.scss, i.e. topics.scss
+*/
 
 /* We generate <a> without href to stop browser from refreshing page. But need
    a mouse pointer for consistency. */
@@ -37,6 +41,7 @@
         margin-bottom: 8px;
 }
 
+/*=================== For devise because we don't have a devisse.scss file.
 /* /view/devise/..... */
 .css-views_devise { /* /views/devise/.... .new_user for /registrations/new.html.erb  */
                 /*                    .edit_user for /reg.../edit.html.erb  */

@@ -28,7 +28,7 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params_whitelist)
     @topic.user = current_user
 
-    # Response: redirect to or forward_to a view with msgs.
+    # Response: redirect to new view or forward_to show view with msgs.
     if @topic.save
       redirect_to @topic, notice: 'Topic was saved successfully.'
     else

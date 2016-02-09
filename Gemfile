@@ -17,12 +17,16 @@ gem 'jquery-rails'
 gem 'turbolinks'
 # Use jquery turbolinks for bootstrap dropdown picklist
 gem 'jquery-turbolinks'
+#------------------------------------------
 # Use Devise authentication
 gem 'devise'
+#-------------------------------------------
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+#-------------------------------------------
 # Use Twitter Bootstrap as CSS framework
 gem 'bootstrap-sass'
+#-------------------------------------------------
 
 # Use Figaro to store Sendgrid and Devise credentials as environment variables.
 #     Doc - Bloc: https://www.bloc.io/resources/environment-variables-with-figaro

@@ -25,7 +25,8 @@
       </ul>
     </div>
     <div class="col-md-4">
-      <%= render partial: 'new_edit_form', locals: { topic: topic } %>
+      <%= render 'shared/errors', obj: topic %>
+      <%= render 'new_edit_form', topic: topic %>
     </div>
   </div>
 </main>

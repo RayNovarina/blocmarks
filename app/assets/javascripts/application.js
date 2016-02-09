@@ -11,7 +11,9 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
-//= require bootstrap/dropdown
+// per:https://github.com/twbs/bootstrap-sass
+// Require Bootstrap Javascripts in app/assets/javascripts/application.js:
+//= require bootstrap-sprockets
 //= require turbolinks
+//= require_tree .

@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="media">
+      <div class="media-body">
+        <h4 class="media-heading css-bookmark-container" style="background: white;">
+          <% if user_signed_in? %>
+            <span class="css-like-link" style="width: 34px; display: inline-block; font-size: 14px; margin-left: 2px; text-decoration: underline;">
+              <%= link_to 'Like', '' %>
+            </span>
+          <% end %>
+            <span class="css-favicon"><%= link_to 'Favi', bookmark.url, class: 'btn btn-xs btn-primary' %></span>
+            <span class="css-bookmark-title" style="text-decoration: underline;">
+              <%= link_to bookmark.title, bookmark.url %>
+            <span>
+          <% if user_signed_in? %>
+            <span class="css-remove-link"><%= link_to 'Remove', '', class: 'btn btn-xs btn-danger pull-right' %></span>
+          <% end %>
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="col-md-2">
+</div>
+<div class="col-md-8 css-page_title">
+  <div class="media">
+    <div class="media-body">
+      <h2 class="media-heading text-center">All Blocmarks</h2>
+    </div>
+  </div>
+</div>
+<div class="col-md-2 css-header_links">
+  <% if user_signed_in? %>
+    <%= link_to 'New Topic', new_topic_path, class: 'btn btn-xs btn-primary pull-right' %>
+  <% end %>
+</div>

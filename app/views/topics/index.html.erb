@@ -1,2 +1,13 @@
-<h1>Topics#index</h1>
-<p>Find me in app/views/topics/index.html.erb</p>
+<header>
+  <div class="row">
+    <%= render partial: 'index_page_header', locals: { topics: @topics } %>
+  </div>
+</header>
+
+<main>
+  <div class="row">
+    <div class="col-md-12">
+      <%= render @topics %>
+    </div>
+  </div>
+</main>

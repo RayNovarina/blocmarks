@@ -1,6 +1,6 @@
 <h2>Change your password</h2>
 
-<div class="views_devise">
+<div class="css-views_devise">
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
     <%= devise_error_messages! %>
     <%= f.hidden_field :reset_password_token %>
@@ -18,7 +18,7 @@
       <%= f.password_field :password_confirmation, autocomplete: 'off', placeholder: 'Re-enter password' %>
     </div>
 
-    <div class="actions">
+    <div class="css-actions">
       <%= f.submit 'Change', class: 'btn btn-primary btn-sm' %> my password
     </div>
   <% end %>

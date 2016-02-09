@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-8 css-page_title">
+    <div class="media">
+      <div class="media-body">
+        <h2 class="media-heading text-center">#<%= @topic.title.downcase.capitalize %></h2>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 css-header-links">
+    <% if user_signed_in? %>
+      <%= link_to 'New Bookmark', '', class: 'btn btn-xs btn-primary pull-right' %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-8 text-center css-header-desc">
+    <%= @topic.description %>
+  </div>
+  <div class="col-md-2">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-8 text-center css-header-desc-links">
+    <% if user_signed_in? %>
+        <%= link_to 'Edit', edit_topic_path, class: 'btn btn-xs btn-success' %>
+    <% end %>
+    <% if user_signed_in? %>
+      <%= link_to 'Delete', @topic, method: :delete, class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure you want to delete this topic?'} %>
+    <% end %>
+  </div>
+  <div class="col-md-2">
+  </div>
+</div>

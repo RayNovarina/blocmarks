@@ -20,24 +20,27 @@
 
 /* We generate <a> without href to stop browser from refreshing page. But need
    a mouse pointer for consistency. */
- .navbar-no-href {
-   cursor:pointer;
+ .css-content_for_page_header {
+   .css-navbar-no-href {
+     cursor:pointer;
+   }
  }
 
-.page_main_body_container.container {
+.css-page_main_body_container.container {
   h2 { /* page_title */
       padding-bottom: 20px;
   }
 }
 
+.css-actions { /* form action button */
+        margin-top: 14px;
+        margin-bottom: 8px;
+}
+
 /* /view/devise/..... */
-.views_devise { /* /views/devise/.... .new_user for /registrations/new.html.erb  */
+.css-views_devise { /* /views/devise/.... .new_user for /registrations/new.html.erb  */
                 /*                    .edit_user for /reg.../edit.html.erb  */
   .field {  /* form fields */
           margin-bottom: 6px;
-  }
-  .actions { /* form action button */
-          margin-top: 14px;
-          margin-bottom: 8px;
   }
 }

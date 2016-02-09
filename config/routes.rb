@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :topics
 
   # App landing page.
-  #get 'welcome/index'
+  # get 'welcome/index'
   root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest

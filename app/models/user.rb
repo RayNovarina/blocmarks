@@ -7,5 +7,5 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
 
-  # validates :name, length: { minimum: 1, maximum: 100 }, presence: true
+  validates :name, length: { minimum: 1, maximum: 100 }, presence: true
 end

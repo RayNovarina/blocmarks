@@ -53,7 +53,7 @@ Rails.application.configure do
   #
   # ------ email delivery method/smtp server:
   # Note: if .delivery_method not specified then? smtp msg goes to ActiveMailer
-  # listener off of localhost:3000??
+  # listener off of localhost:25??
   # 1) Email goes to the console.
   # config.action_mailer.delivery_method = nil
   #

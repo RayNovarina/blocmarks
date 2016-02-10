@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
+  get 'incoming/create'
 
+  # The priority is based upon order of creation: first created -> highest
+  # priority.
+  # See how all your routes lay out with "rake routes".
+
+  # For devise authentication gem.
   devise_for :users
 
   resources :users, only: [] do
@@ -14,10 +20,10 @@ Rails.application.routes.draw do
   # get 'welcome/index'
   root 'welcome#index'
 
-  # The priority is based upon order of creation: first created -> highest
-  # priority.
-  # See how all your routes lay out with "rake routes".
+  # For Mailgun email api
+  post :incoming, to: 'incoming#create'
 
+  #---------------------------------------
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

@@ -1,2 +1,7 @@
+# Email server installed on heroku
 SENDGRID_PASSWORD:
 SENDGRID_USERNAME:
+
+# Mailgun email middleware/api Ref: https://www.bloc.io/users/ray-novarina/checkpoints/1691?roadmap_section_id=123
+MAILGUN_SMTP_LOGIN:
+MAILGUN_SMTP_PASSWORD:

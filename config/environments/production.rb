@@ -102,7 +102,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options =
     { host: 'mighty-waters-61717.herokuapp.com' }
   # For smtp server settings.
-  # SendGrid email lib and credentials in the environment.
+  # SendGrid email lib and credentials are in the production environment.
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     address:        'smtp.sendgrid.net',

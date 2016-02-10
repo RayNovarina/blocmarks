@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
+
   devise_for :users
 
   resources :users, only: [] do
     resources :topics, only: [:index]
   end
 
-  resources :topics
+  resources :topics do
+    resources :bookmarks, only: [:new, :create, :edit, :update, :destroy]
+  end
 
   # App landing page.
   # get 'welcome/index'

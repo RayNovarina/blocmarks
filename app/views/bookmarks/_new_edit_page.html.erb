@@ -1,0 +1,31 @@
+<header>
+  <div class="row">
+    <div class="col-md-8 css-page_title">
+      <div class="media">
+        <div class="media-body">
+          <h2 class="media-heading">
+            <%= bookmark.new_record? ? 'New' : 'Edit' %> Bookmark
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="row">
+    <div class="col-md-4">
+      <p>Guidelines for bookmarks:</p>
+      <ul>
+        <li>Make sure the topic is a good match.</li>
+        <li>Description should indicate what this bookmark leads to.
+        </li>
+        <li>Bookmarks can be edited or deleted by their creator at any time.</li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <%= render partial: 'shared/errors', locals: { obj: bookmark } %>
+      <%= render partial: 'new_edit_form', locals: { topic: topic, bookmark: bookmark } %>
+    </div>
+  </div>
+</main>

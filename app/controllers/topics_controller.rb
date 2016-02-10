@@ -28,10 +28,11 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params_whitelist)
     @topic.user = current_user
 
-    # Response: redirect to new view or forward_to show view with msgs.
     if @topic.save
+      # Response: tell browser to show this new topic.
       redirect_to @topic, notice: 'Topic was saved successfully.'
     else
+      # Response: redisplay the edit form with error msgs.
       flash.now[:alert] = 'Error creating topic. Please try again.'
       render :new
     end
@@ -65,9 +66,9 @@ class TopicsController < ApplicationController
     # Response: redirect to or forward_to to a view.
     if @topic.destroy
       flash[:notice] = "\"#{@topic.title}\" was deleted successfully."
-      redirect_to @topic
+      redirect_to action: :index
     else
-      flash.now[:alert] = 'There was an error deleting the topic.'
+      flash.now[:alert] = 'There was an error deleting this topic.'
       render :show
     end
   end

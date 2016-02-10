@@ -4,7 +4,7 @@
       <div class="media-body">
         <h4 class="media-heading">
           <%= link_to "##{topic.title}", topic %>
-          <span><%= 'This is the topic description.' %></span>
+          <span><%= topic.description %></span>
         </h4>
       </div>
     </div>
@@ -13,8 +13,16 @@
   </div>
   <div class="col-md-2">
     <% if user_signed_in? %>
-      <%= link_to 'New Bookmark', '', class: 'btn btn-xs btn-primary pull-right' %>
+      <%= link_to 'New Bookmark', new_topic_bookmark_path(topic), class: 'btn btn-xs btn-primary pull-right' %>
     <% end %>
   </div>
 </div>
 <% # end of topic desc container row %>
+
+<div class="row">
+  <div class="col-md-12">
+    <% topic.bookmarks.each do |bookmark| %>
+      <%= render partial: '/bookmarks/bookmark', locals: { topic: topic, bookmark: bookmark } %>
+    <% end %>
+  </div>
+</div>

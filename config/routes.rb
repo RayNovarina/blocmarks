@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   # For Mailgun email api
   post :incoming, to: 'incoming#create'
+  # For local dev testing.
+  get  :incoming, to: 'incoming#create'
 
   #---------------------------------------
   # You can have the root of your site routed with "root"

@@ -15,21 +15,29 @@ class IncomingController < ApplicationController
   #
   def create
     #
-    user = get_user_by_email_or_create
-    if user && user.errors.messages.empty?
-      topic = get_topic_by_title_or_create(user)
-    else
-      topic = nil
-    end
-    if topic && topic.errors.messages.empty?
-      bookmark = create_bookmark(topic)
-    else
-      bookmark = nil
-    end
-    if bookmark && bookmark.errors.messages.empty?
+    if ((user = user_by_email_or_create).present? && user.errors.messages.empty?) &&
+       ((topic = topic_by_title_or_create(user)).present? && topic.errors.messages.empty?) &&
+       ((bookmark = create_bookmark(topic)).present? && bookmark.errors.messages.empty?)
       topic.bookmarks << bookmark
       topic.save
     end
+    # topic.bookmarks << bookmark
+    # topic.save
+    # user = user_by_email_or_create
+    # if user.present? && user.errors.messages.empty?
+    #   topic = topic_by_title_or_create(user)
+    # else
+    #  topic = nil
+    # end
+    # if topic.present? && topic.errors.messages.empty?
+    #  bookmark = create_bookmark(topic)
+    # else
+    #  bookmark = nil
+    # end
+    # if bookmark.present? && bookmark.errors.messages.empty?
+    #  topic.bookmarks << bookmark
+    #  topic.save
+    # end
     # Assuming all went well.
     # Else user, topic, bookmark may be nil or have .errors{}
     head 200
@@ -37,7 +45,7 @@ class IncomingController < ApplicationController
 
   private
 
-  def get_user_by_email_or_create
+  def user_by_email_or_create
     user = User.find_by_email(params[:sender]) || create_new_user
     user
   end
@@ -57,7 +65,7 @@ class IncomingController < ApplicationController
     params.require(:user).permit(:email, :password, :name)
   end
 
-  def get_topic_by_title_or_create(user)
+  def topic_by_title_or_create(user)
     topic = Topic.find_by_title(params[:subject]) || create_new_topic(user)
     topic
   end

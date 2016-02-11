@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   post :incoming, to: 'incoming#create'
   # For local dev testing.
   get  :incoming, to: 'incoming#create'
+  #post '/topics/:topic_id/bookmarks/incoming',        to: 'incoming#create_local', as: 'incoming_local' if Rails.env.development?
+  #get  '/topics/:topic_id/bookmarks/incoming/create', to: 'incoming#create_local', as: 'incoming_local' if Rails.env.development?
 
   #---------------------------------------
   # You can have the root of your site routed with "root"

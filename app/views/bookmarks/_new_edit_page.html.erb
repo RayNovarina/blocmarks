@@ -24,6 +24,7 @@
       </ul>
     </div>
     <div class="col-md-4">
+      <%= render partial: 'new_edit_parent_topic', locals: { topic: topic } %>
       <%= render partial: 'shared/errors', locals: { obj: bookmark } %>
       <%= render partial: 'new_edit_form', locals: { topic: topic, bookmark: bookmark } %>
     </div>

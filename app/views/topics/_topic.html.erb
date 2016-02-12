@@ -1,28 +1,30 @@
-<div class="row" class="css-topic-description-row">
-  <div class="col-md-8">
-    <div class="media">
-      <div class="media-body">
-        <h4 class="media-heading">
-          <%= link_to "#{topic.title}", topic, title: "Created by: #{topic.user.name}" %>
-          <span><%= topic.description %></span>
-        </h4>
+<div class="css-topic" style="margin-bottom:20px;">
+  <div class="row" class="css-topic-description-row" style="margin-bottom: 4px;">
+    <div class="col-md-8">
+      <div class="media">
+        <div class="media-body">
+          <h4 class="media-heading">
+            <%= link_to "#{topic.title}", topic, title: "Created by: #{topic.user.name}" %>
+            <span><%= topic.description %></span>
+          </h4>
+        </div>
       </div>
     </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+      <% if policy(Bookmark).create? %>
+        <%= link_to 'New Bookmark', new_topic_bookmark_path(topic), class: 'btn btn-xs btn-primary pull-right' %>
+      <% end %>
+    </div>
   </div>
-  <div class="col-md-2">
-  </div>
-  <div class="col-md-2">
-    <% if policy(Bookmark).create? %>
-      <%= link_to 'New Bookmark', new_topic_bookmark_path(topic), class: 'btn btn-xs btn-primary pull-right' %>
-    <% end %>
-  </div>
-</div>
-<% # end of topic desc container row %>
+  <% # end of topic desc container row %>
 
-<div class="row">
-  <div class="col-md-12">
-    <% topic.bookmarks.each do |bookmark| %>
-      <%= render partial: '/bookmarks/bookmark', locals: { topic: topic, bookmark: bookmark } %>
-    <% end %>
+  <div class="row">
+    <div class="col-md-12">
+      <% topic.bookmarks.each do |bookmark| %>
+        <%= render partial: '/bookmarks/bookmark', locals: { topic: topic, bookmark: bookmark } %>
+      <% end %>
+    </div>
   </div>
 </div>

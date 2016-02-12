@@ -1,5 +1,6 @@
 #
 class Bookmark < ActiveRecord::Base
+  belongs_to :user
   belongs_to :topic
 
   validates :title, length: { minimum: 2 }, presence: true

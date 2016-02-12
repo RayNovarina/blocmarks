@@ -17,7 +17,7 @@ class IncomingController < ApplicationController
     #
     if ((user = user_by_email_or_create).present? && user.errors.messages.empty?) &&
        ((topic = topic_by_title_or_create(user)).present? && topic.errors.messages.empty?) &&
-       ((bookmark = create_bookmark(topic)).present? && bookmark.errors.messages.empty?)
+       ((bookmark = create_bookmark(user, topic)).present? && bookmark.errors.messages.empty?)
       topic.bookmarks << bookmark
       topic.save
     end
@@ -85,8 +85,9 @@ class IncomingController < ApplicationController
     params.require(:topic).permit(:title, :description)
   end
 
-  def create_bookmark(topic)
+  def create_bookmark(user, topic)
     bookmark = topic.bookmarks.build(bookmark_incoming_params_whitelist)
+    bookmark.user = user
     bookmark.save
     bookmark
   end

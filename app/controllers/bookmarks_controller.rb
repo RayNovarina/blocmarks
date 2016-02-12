@@ -6,6 +6,7 @@ class BookmarksController < ApplicationController
   #
   #
   def new
+    authorize Bookmark
     @topic = Topic.find(params[:topic_id])
     @bookmark = Bookmark.new
     # Response: Controller will forward_to /views/bookmarks/new.html.erb
@@ -15,8 +16,10 @@ class BookmarksController < ApplicationController
 
   # Note: we get here from a submit button via the new view.
   def create
+    authorize Bookmark
     @topic = Topic.find(params[:topic_id])
     @bookmark = @topic.bookmarks.build(bookmark_params_whitelist)
+    @bookmark.user = current_user
 
     if @bookmark.save
       # Response: goto show parent topic, new bookmark, msgs.
@@ -30,6 +33,7 @@ class BookmarksController < ApplicationController
 
   def edit
     @bookmark = Bookmark.find(params[:id])
+    authorize @bookmark
     # Response: Controller will forward_to /views/bookmarks/edit.html.erb
     #           with @bookmark.
     # Note: clicking on the form submit button will POST to update()
@@ -38,6 +42,7 @@ class BookmarksController < ApplicationController
   # Note: we get here from a submit button via the edit view.
   def update
     @bookmark = Bookmark.find(params[:id])
+    authorize @bookmark
     @bookmark.assign_attributes(bookmark_params_whitelist)
 
     if @bookmark.save
@@ -52,6 +57,7 @@ class BookmarksController < ApplicationController
 
   def destroy
     @bookmark = Bookmark.find(params[:id])
+    authorize @bookmark
 
     if @bookmark.destroy
       # Response: goto show parent topic, one less bookmark, msgs.

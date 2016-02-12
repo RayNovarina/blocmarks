@@ -3,7 +3,7 @@
     <div class="col-md-8 css-page_title">
       <div class="media">
         <div class="media-body">
-          <h2 class="media-heading">
+          <h2 class="media-heading" title='<%= bookmark.new_record? ? "" : "Created by: #{bookmark.user.name}" %>'>
             <%= bookmark.new_record? ? 'New' : 'Edit' %> Bookmark
           </h2>
         </div>

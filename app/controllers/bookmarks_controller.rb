@@ -20,6 +20,8 @@ class BookmarksController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     @bookmark = @topic.bookmarks.build(bookmark_params_whitelist)
     @bookmark.user = current_user
+    require 'pry'
+    binding.pry
 
     if @bookmark.save
       # Response: goto show parent topic, new bookmark, msgs.

@@ -4,7 +4,9 @@
   <div class="col-md-8 css-page_title">
     <div class="media">
       <div class="media-body">
-        <h2 class="media-heading text-center">#<%= topic.title.downcase.capitalize %></h2>
+        <h2 class="media-heading text-center" title='<%= "Created by: #{topic.user.name}" %>'>
+          #<%= topic.title.downcase.capitalize %>
+        </h2>
       </div>
     </div>
   </div>

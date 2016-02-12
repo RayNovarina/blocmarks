@@ -1,8 +1,19 @@
 #
 class IncomingController < ApplicationController
+  attr_accessor :incoming_email_user
+
   # http://stackoverflow.com/questions/1177863/how-do-i-ignore-the-authenticity
   #     -token-for-specific-actions-in-rails
   skip_before_action :verify_authenticity_token, only: [:create]
+
+  # Customize Pundit user per: https://github.com/elabs/pundit/blob/master/README.md#policies
+  # In some cases your controller might not have access to current_user, or your
+  # current_user is not the method that should be invoked by Pundit.
+  # Simply define a method in your controller called pundit_user.
+  #
+  def pundit_user
+    @incoming_email_user
+  end
 
   # user_email = params[:sender]
   # @user = User.find_by_email(user_email)
@@ -46,8 +57,7 @@ class IncomingController < ApplicationController
   private
 
   def user_by_email_or_create
-    user = User.find_by_email(params[:sender]) || create_new_user
-    user
+    @incoming_email_user = User.find_by_email(params[:sender]) || create_new_user
   end
 
   def create_new_user

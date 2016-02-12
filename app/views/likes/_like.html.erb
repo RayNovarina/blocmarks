@@ -1,5 +1,6 @@
-<div>
-  <% if like = current_user.liked(bookmark) %>
+<div class="css-like-link"
+     style="width: 48px; display: inline-block;">
+  <% if like = current_user.liked?(bookmark) %>
     <%= link_to [bookmark, like], class: 'btn btn-danger', method: :delete do %>
       <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Unlike
     <% end %>

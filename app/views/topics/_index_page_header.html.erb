@@ -8,7 +8,7 @@
   </div>
 </div>
 <div class="col-md-2 css-header_links">
-  <% if user_signed_in? %>
+  <% if policy(Topic).create? %>
     <%= link_to 'New Topic', new_topic_path, class: 'btn btn-xs btn-primary pull-right' %>
   <% end %>
 </div>

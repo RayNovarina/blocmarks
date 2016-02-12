@@ -3,21 +3,23 @@
     <div class="media">
       <div class="media-body">
         <h4 class="media-heading css-bookmark-container" style="background: white;">
-          <% if user_signed_in? %>
-            <span class="css-like-link" style="width: 34px; display: inline-block; font-size: 14px; margin-left: 2px; text-decoration: underline;">
-              <%= link_to 'Like', '' %>
-            </span>
+          <% if policy(Like).create? %>
+            <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
           <% end %>
-            <span class="css-favicon"><%= link_to 'Favi', bookmark.url, target: '_blank', class: 'btn btn-xs btn-primary' %></span>
+            <span class="css-favicon" style="margin-left:40px; margin-right:2px;">
+              <%= link_to 'Favicon', bookmark.url, target: '_blank', class: 'btn btn-xs btn-info' %>
+            </span>
             <span class="css-bookmark-title" style="text-decoration: underline;">
               <%= link_to bookmark.title, bookmark.url, target: '_blank', title: "Created by: #{bookmark.user.name}" %>
             <span>
-          <% if user_signed_in? && bookmark.user == current_user %>
-            <span class="css-remove-link">
-              <%= link_to 'Remove', [topic, bookmark], method: :delete, class: 'btn btn-xs btn-danger pull-right', data: {confirm: 'Are you sure you want to delete this bookmark?'} %>
+          <% if policy(bookmark).destroy? %>
+            <span class="pull-right css-bookmark-action" style="padding-top: 4px; padding-right: 4px;">
+              <%= link_to 'Remove', [topic, bookmark], method: :delete, class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure you want to delete this bookmark?'} %>
             </span>
-            <span class="css-edit-link">
-              <%= link_to 'Edit', edit_topic_bookmark_path(topic, bookmark), class: 'btn btn-xs btn-success pull-right' %>
+          <% end %>
+          <% if policy(bookmark).edit? %>
+            <span class="pull-right css-bookmark-action" style="padding-top: 4px; padding-right: 4px;">
+              <%= link_to 'Edit', edit_topic_bookmark_path(topic, bookmark), class: 'btn btn-xs btn-success' %>
             </span>
           <% end %>
         </h4>

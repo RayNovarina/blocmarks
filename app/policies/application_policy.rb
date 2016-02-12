@@ -7,13 +7,14 @@ class ApplicationPolicy
     @record = record
   end
 
-  # def index?
-  #  false
-  # end
+  def index?
+    true
+  end
 
-  # def show?
-  #  scope.where(id: record.id).exists?
-  # end
+  def show?
+    # scope.where(id: record.id).exists?
+    true
+  end
 
   def create?
     user.present?

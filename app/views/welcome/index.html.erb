@@ -1,7 +1,9 @@
     <div class="container">
       <h1>Welcome!</h1>
       <p>Blocmarks is a resource for saving and sharing bookmarks simply via email.</p>
-      <p><%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %> to get started.</p>
+      <% if policy(User).create? %>
+        <p><%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %> to get started.</p>
+      <% end %>  
       <p><h4><%= link_to 'Learn More', '' %></p></h4>
     </div>
 

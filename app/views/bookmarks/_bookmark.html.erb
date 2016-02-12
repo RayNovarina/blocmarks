@@ -3,7 +3,7 @@
     <div class="media">
       <div class="media-body">
         <h4 class="media-heading css-bookmark-container" style="background: white;">
-          <% if policy(Like).create? %>
+          <% if policy(bookmark).edit? %>
             <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
           <% end %>
             <span class="css-favicon" style="margin-left:40px; margin-right:2px;">

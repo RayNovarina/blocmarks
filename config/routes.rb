@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  get 'users/show'
+
   # The priority is based upon order of creation: first created -> highest
   # priority.
   # See how all your routes lay out with "rake routes".
 
   # For devise authentication gem.
   devise_for :users
+  resources :users, only: [:show]
 
   resources :users, only: [] do
     resources :topics, only: [:index]

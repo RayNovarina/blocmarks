@@ -1,7 +1,7 @@
 <div class="css-navbar_right">
   <ul class="nav navbar-nav pull-right">
     <% if user_signed_in? %>
-        <li><%= link_to 'My Blocmarks', '', title: "#{current_user.name} (#{current_user.email})" %></li>
+        <li><%= link_to 'My Blocmarks', user_path(current_user), title: "#{current_user.name} (#{current_user.email})" %></li>
         <li><%= link_to '|', '' %></li>
         <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
     <% else %>

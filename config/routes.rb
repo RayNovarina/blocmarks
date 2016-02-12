@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'incoming/create'
-
   # The priority is based upon order of creation: first created -> highest
   # priority.
   # See how all your routes lay out with "rake routes".
@@ -14,6 +12,10 @@ Rails.application.routes.draw do
 
   resources :topics do
     resources :bookmarks, only: [:new, :create, :edit, :update, :destroy]
+  end
+
+  resources :bookmarks, only: [] do
+    resources :likes, only: [:index, :create, :destroy]
   end
 
   # App landing page.

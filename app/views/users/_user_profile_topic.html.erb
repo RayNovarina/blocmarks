@@ -1,0 +1,41 @@
+<div class="css-topic" style="margin-bottom:20px;">
+  <header style="margin-bottom:4px;">
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="media-heading css-topic-title">
+          <span style="text-decoration: underline; font-size: 24px;">
+            <%= link_to "##{topic.title}", topic, title: "Created by: #{topic.user.name}" %>
+          </span>
+          <span class="css-topic-title-actions" style="margin-left: 10px;">
+            <% unless defined? no_delete && no_delete %>
+              <span><%= link_to 'Edit', '', class: 'btn btn-xs btn-success' %></span>
+            <% end %>
+            <% unless defined? no_edit && no_edit %>
+              <span><%= link_to 'Delete', '', class: 'btn btn-xs btn-danger' %></span>
+            <% end %>
+          </span>
+        </h4>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="row">
+      <div class="col-md-12">
+<% #!!!!!!!!!! filter the bookmarks for user_id  %>
+        <% #topic.bookmarks.each do |bookmark| %>
+        <% topic.bookmarks_by_user(current_user).each do |bookmark|  %>
+          <% #if bookmark.user_id == current_user.id %>
+          <%= render partial: '/bookmarks/bookmark',
+                     locals: { topic: topic, bookmark: bookmark,
+                               no_likes:  (defined? bookmark_no_likes  ? bookmark_no_likes : false),
+                               no_delete: (defined? bookmark_no_delete ? bookmark_no_delete : false),
+                               no_edit:   (defined? bookmark_no_edit   ? bookmark_no_edit : false)
+                             }
+          %>
+          <% #end %>
+        <% end %>
+      </div>
+    </div>
+  </main>
+</div>

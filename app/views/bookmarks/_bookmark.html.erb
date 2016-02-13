@@ -3,7 +3,7 @@
     <div class="media">
       <div class="media-body">
         <h4 class="media-heading css-bookmark-container" style="background: white;">
-          <% if policy(Like).create? %>
+          <% if policy(Like).create? && (!defined? no_likes || no_likes == false) %>
             <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
           <% end %>
             <span class="css-favicon" style="margin-left:40px; margin-right:2px;">
@@ -12,12 +12,12 @@
             <span class="css-bookmark-title" style="text-decoration: underline;">
               <%= link_to bookmark.title, bookmark.url, target: '_blank', title: "Created by: #{bookmark.user.name}" %>
             <span>
-          <% if policy(bookmark).destroy? %>
+          <% if policy(bookmark).destroy? && (!defined? no_delete || no_delete == false) %>
             <span class="pull-right css-bookmark-action" style="padding-top: 4px; padding-right: 4px;">
               <%= link_to 'Remove', [topic, bookmark], method: :delete, class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure you want to delete this bookmark?'} %>
             </span>
           <% end %>
-          <% if policy(bookmark).edit? %>
+          <% if policy(bookmark).edit? && (!defined? no_edit || no_edit == false) %>
             <span class="pull-right css-bookmark-action" style="padding-top: 4px; padding-right: 4px;">
               <%= link_to 'Edit', edit_topic_bookmark_path(topic, bookmark), class: 'btn btn-xs btn-success' %>
             </span>

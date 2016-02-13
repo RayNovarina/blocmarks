@@ -1,0 +1,19 @@
+<div class="css-<%= rpt_tag %>-rpt" style="margin-bottom: 40px;">
+  <header style="margin-bottom:10px;">
+    <div class="row">
+      <h2 class="media-heading text-center"><%= title %></h2>
+    </div>
+  </header>
+
+  <% topics.each do |topic| %>
+    <%= render partial: 'user_profile_topic',
+               locals: { topic: topic,
+                         no_delete:          (defined? topic_no_delete    ? topic_no_delete : false),
+                         no_edit:            (defined? topic_no_edit      ? topic_no_edit : false),
+                         bookmark_no_likes:  (defined? bookmark_no_likes  ? bookmark_no_likes : false),
+                         bookmark_no_delete: (defined? bookmark_no_delete ? bookmark_no_delete : false),
+                         bookmark_no_edit:   (defined? bookmark_no_edit   ? bookmark_no_edit : false)
+                       }
+    %>
+  <% end %>
+</div>

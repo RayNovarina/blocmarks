@@ -3,8 +3,10 @@
     <div class="col-md-8">
       <div class="media">
         <div class="media-body">
-          <h4 class="media-heading">
-            <%= link_to "#{topic.title}", topic, title: "Created by: #{topic.user.name}" %>
+          <h4 class="media-heading css-topic-title">
+            <span style="text-decoration: underline; font-size: 24px;">
+              <%= link_to "##{topic.title}", topic, title: "Created by: #{topic.user.name}" %>
+            </span>
             <span><%= topic.description %></span>
           </h4>
         </div>

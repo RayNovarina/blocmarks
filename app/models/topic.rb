@@ -9,5 +9,5 @@ class Topic < ActiveRecord::Base
   # CLASS and Instance methods that extend the Topic ActiveRecord class via
   # /models/concerns files. And add useful helper routines and to put biz logic
   # in the model and not in controllers.
-  # include TopicExtensions # /models/concerns/topic_extensions.rb
+  include TopicExtensions # /models/concerns/topic_extensions.rb
 end

@@ -3,7 +3,6 @@
     <div class="media">
       <div class="media-body">
         <h4 class="media-heading css-bookmark-container" style="background: white;">
-          
           <% if policy(Like).create? && ((defined? no_likes).nil? ? true : !no_likes) %>
             <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
           <% end %>

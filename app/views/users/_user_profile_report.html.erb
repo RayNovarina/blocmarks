@@ -11,8 +11,6 @@
                          bookmarks:  (rpt_tag == 'my-blocmarks') \
                                              ? topic.bookmarks_by_user(current_user) \
                                              : topic.bookmarks_by_user_liked(current_user),
-                         #bookmarks:  topic.bookmarks_by_user(current_user),
-                         #bookmarks:   topic.bookmarks_by_user_liked(current_user),
                          no_delete:          (defined? topic_no_delete).nil?    ? false : topic_no_delete,
                          no_edit:            (defined? topic_no_edit).nil?      ? false : topic_no_edit,
                          bookmark_no_likes:  (defined? bookmark_no_likes).nil?  ? false : bookmark_no_likes,

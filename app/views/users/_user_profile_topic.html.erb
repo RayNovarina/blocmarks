@@ -22,7 +22,6 @@
   <main>
     <div class="row">
       <div class="col-md-12">
-<% # !!!!  bookmarks_by_user_liked(user) if liked bookmarks report. %>
         <% bookmarks.each do |bookmark|  %>
           <%= render partial: '/bookmarks/bookmark',
                      locals: { topic: topic, bookmark: bookmark,

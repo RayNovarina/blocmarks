@@ -4,19 +4,19 @@ class UsersController < ApplicationController
     # populate @user_bookmarks with the user's bookmarks
     # @user_bookmarks = Bookmark.where(user_id: current_user.id).group(:topic_id)
     @topics_with_user_bookmarks =
-      Topic.select('topics.*')
+      Topic.select('topics.*, topics.id, LOWER(topics.title)')
            .joins(:bookmarks)
            .where('bookmarks.user_id = ?', current_user.id)
-           .reorder('lower(topics.title) ASC')
+           .reorder('LOWER(topics.title) ASC')
            .distinct('topics.id')
 
     # populate @liked_bookmarks with liked bookmarks
     # @liked_bookmarks = Bookmark.joins(:likes).where('likes.user_id = ?', current_user.id).group(:topic_id)
     @topics_with_user_liked_bookmarks =
-      Topic.select('topics.*')
+      Topic.select('topics.*, topics.id, LOWER(topics.title)')
            .joins(bookmarks: :likes)
            .where('likes.user_id = ?', current_user.id)
-           .reorder('lower(topics.title) ASC')
+           .reorder('LOWER(topics.title) ASC')
            .distinct('topics.id')
   end
 end

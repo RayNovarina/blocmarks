@@ -68,7 +68,7 @@ class IncomingController < ApplicationController
 
   def user_incoming_params_whitelist
     params[:user] = {
-      name: 'Created by email submission',
+      name: "#{params[:sender].split('@')[0]} Email_Submitter",
       password: 'password'
     }
     params[:user][:email] = params[:sender] if params.key?(:sender)
@@ -89,7 +89,7 @@ class IncomingController < ApplicationController
 
   def topic_incoming_params_whitelist
     params[:topic] = {
-      description: 'Created by email submission'
+      description: "Email submission from #{@incoming_email_user.name}"
     }
     params[:topic][:title] = params[:subject] if params.key?(:subject)
     params.require(:topic).permit(:title, :description)
@@ -104,8 +104,8 @@ class IncomingController < ApplicationController
 
   def bookmark_incoming_params_whitelist
     params[:bookmark] = {
-      title:       'Created by email submission',
-      description: 'Please complete: Created by email submission'
+      title:       "Email submission from #{@incoming_email_user.name}",
+      description: "Please complete: Created by email submission from #{@incoming_email_user.name}"
     }
     params[:bookmark][:url] = params['body-plain'] if params.key?('body-plain')
     params.require(:bookmark).permit(:title, :description, :url)

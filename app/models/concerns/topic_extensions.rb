@@ -46,8 +46,18 @@ module TopicExtensions
   #   self.password_reset_token = 123
   # end
   #
-  # The liked? method will let you know if a given user has liked a bookmark
+  # The bookmarks_by_user method retrieves all Bookmark records for THIS topic
+  # and for the specified user. Returns a list sorted by Bookmark title.
   def bookmarks_by_user(user)
-    Bookmark.where(user_id: user.id)
+    Bookmark.where('topic_id = :topic_id AND user_id = :user_id',
+                   topic_id: id, user_id: user.id).reorder('lower(title) ASC')
+  end
+
+  # The bookmarks_by_user method retrieves all Bookmark records for THIS topic
+  # and for the specified user. Returns a list sorted by Bookmark title.
+  def bookmarks_by_user_liked(user)
+    Bookmark.joins(:likes)
+            .where('topic_id = :topic_id AND likes.user_id = :user_id ',
+                   topic_id: id, user_id: user.id).reorder('lower(title) ASC')
   end
 end

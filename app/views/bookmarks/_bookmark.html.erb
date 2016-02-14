@@ -1,15 +1,16 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="media">
       <div class="media-body">
         <h4 class="media-heading css-bookmark-container" style="background: white;">
-          <% if policy(Like).create? && ((defined? no_likes).nil? || no_likes == false) %>
+          
+          <% if policy(Like).create? && ((defined? no_likes).nil? ? true : !no_likes) %>
             <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
           <% end %>
             <span class="css-favicon" style="margin-left:40px; margin-right:2px;">
               <%= link_to 'Favicon', bookmark.url, target: '_blank', class: 'btn btn-xs btn-info' %>
             </span>
-            <span class="css-bookmark-title" style="text-decoration: underline;">
+            <span class="css-bookmark-title" style="overflow: hidden; text-decoration: underline;">
               <%= link_to bookmark.title, bookmark.url, target: '_blank', title: "Created by: #{bookmark.user.name}" %>
             <span>
           <% if policy(bookmark).destroy? && ((defined? no_delete).nil? || no_delete == false) %>
@@ -27,3 +28,24 @@
     </div>
   </div>
 </div>
+
+<% if Rails.env.development? %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="media">
+      <div class="media-body">
+        <h5 class="media-heading css-bookmark-container" style="background: yellow; font-size: 10px;">
+          <span>
+            <%= "First liked by #{bookmark.likes.empty? ? 'NO ONE' : bookmark.likes[0].user.name.split(' ')[0]}"
+            %>
+          </span>
+          <span style="margin-left: 8px;">
+            <%= "Created by #{bookmark.user.name.split(' ')[0]}" %>
+            <%= "#{time_ago_in_words(bookmark.created_at)} ago" %>
+          </span>
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

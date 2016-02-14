@@ -8,7 +8,7 @@
   <% topics.each do |topic| %>
     <%= render partial: 'user_profile_topic',
                locals: { topic: topic,
-                         bookmarks:  (rpt_tag == 'my-blockmarks') \
+                         bookmarks:  (rpt_tag == 'my-blocmarks') \
                                              ? topic.bookmarks_by_user(current_user) \
                                              : topic.bookmarks_by_user_liked(current_user),
                          #bookmarks:  topic.bookmarks_by_user(current_user),

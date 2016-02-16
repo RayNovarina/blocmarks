@@ -38,9 +38,6 @@ gem 'figaro', '1.0'
 # Use embedly for embedding bookmark info and image resizing.
 gem 'embedly'
 #-------------------------------------------
-# Use screencap to capture website page images
-gem 'screencap'
-#--------------------------------------------
 
 #
 #============== DEVELOPMENT only GEMS =================

@@ -11,11 +11,13 @@
                          bookmarks:  (rpt_tag == 'my-blocmarks') \
                                              ? topic.bookmarks_by_user(current_user) \
                                              : topic.bookmarks_by_user_liked(current_user),
+                         bookmarks_per_row:  3,
                          no_delete:          (defined? topic_no_delete).nil?    ? false : topic_no_delete,
                          no_edit:            (defined? topic_no_edit).nil?      ? false : topic_no_edit,
                          bookmark_no_likes:  (defined? bookmark_no_likes).nil?  ? false : bookmark_no_likes,
                          bookmark_no_delete: (defined? bookmark_no_delete).nil? ? false : bookmark_no_delete,
-                         bookmark_no_edit:   (defined? bookmark_no_edit).nil?   ? false : bookmark_no_edit
+                         bookmark_no_edit:   (defined? bookmark_no_edit).nil?   ? false : bookmark_no_edit,
+                         bookmark_embedly:   (defined? bookmark_embedly).nil?   ? false : bookmark_embedly
                        }
     %>
   <% end %>

@@ -1,3 +1,15 @@
+<% if (defined? embedly).nil? == false && embedly %>
+  <%= render partial: '/bookmarks/bookmark_embedly',
+             locals: { topic: topic, bookmark: bookmark,
+                       bookmark_column: bookmark_column,
+                       no_likes:  (defined? no_likes).nil?   ? false : no_likes,
+                       no_delete: (defined? no_delete).nil?  ? false : no_delete,
+                       no_edit:   (defined? no_edit).nil?    ? false : no_edit,
+                       embedly:   (defined? embedly).nil?    ? false : embedly
+                     }
+  %>
+<% else %>
+
 <div class="row">
   <div class="col-md-12">
     <div class="media">
@@ -27,24 +39,11 @@
     </div>
   </div>
 </div>
-
-<% if Rails.env.development? %>
-<div class="row">
-  <div class="col-md-12">
-    <div class="media">
-      <div class="media-body">
-        <h5 class="media-heading css-bookmark-container" style="background: yellow; font-size: 10px;">
-          <span>
-            <%= "First liked by #{bookmark.likes.empty? ? 'NO ONE' : bookmark.likes[0].user.name.split(' ')[0]}"
-            %>
-          </span>
-          <span style="margin-left: 8px;">
-            <%= "Created by #{bookmark.user.name.split(' ')[0]}" %>
-            <%= "#{time_ago_in_words(bookmark.created_at)} ago" %>
-          </span>
-        </h5>
-      </div>
-    </div>
-  </div>
-</div>
 <% end %>
+
+<% #= render partial: 'bookmarks/bookmark_debug_footer',
+  #        locals: { topic: topic,
+  #                   bookmark: bookmark,
+  #                   embedly:   (defined? embedly).nil?    ? false : embedly
+  #                 }
+%>

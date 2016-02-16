@@ -22,14 +22,20 @@
   <main>
     <div class="row">
       <div class="col-md-12">
-        <% bookmarks.each do |bookmark|  %>
+        <% num_bookmarks = bookmarks.length
+           bookmarks.each_with_index do |bookmark, index|
+        %>
           <%= render partial: '/bookmarks/bookmark',
                      locals: { topic: topic, bookmark: bookmark,
+                               # col = 0, 1, 2  index % 3 = column position?
+                               bookmark_column: index % bookmarks_per_row,
                                no_likes:  (defined? bookmark_no_likes).nil?   ? false : bookmark_no_likes,
                                no_delete: (defined? bookmark_no_delete).nil?  ? false : bookmark_no_delete,
-                               no_edit:   (defined? bookmark_no_edit).nil?    ? false : bookmark_no_edit
+                               no_edit:   (defined? bookmark_no_edit).nil?    ? false : bookmark_no_edit,
+                               embedly:   (defined? bookmark_embedly).nil?    ? false : bookmark_embedly
                              }
           %>
+          <% empty_bookmark_columns = num_bookmarks  % bookmarks_per_row %>
         <% end %>
       </div>
     </div>

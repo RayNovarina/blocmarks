@@ -29,13 +29,20 @@ gem 'pundit'
 #------------------------------------------
 # Use Twitter Bootstrap as CSS framework
 gem 'bootstrap-sass'
-#-------------------------------------------------
-
+#-------------------------------------------
 # Use Figaro to store Sendgrid and Devise credentials as environment variables.
 #     Doc - Bloc: https://www.bloc.io/resources/environment-variables-with-figaro
 #     GitHub - https://github.com/laserlemon/figaro#give-me-an-example
 gem 'figaro', '1.0'
+#---------------------------------------
+# Use embedly for embedding bookmark info and image resizing.
+gem 'embedly'
+#-------------------------------------------
+# Use screencap to capture website page images
+gem 'screencap'
+#--------------------------------------------
 
+#
 #============== DEVELOPMENT only GEMS =================
 group :development do
   # Use sqlite3 as the SQL db server for Active Record in development/local OSX

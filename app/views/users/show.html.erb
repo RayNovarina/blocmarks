@@ -3,15 +3,17 @@
                      topics: @topics_with_user_bookmarks,
                      #topic_no_delete: true, topic_no_edit: true
                      bookmark_no_likes: true, bookmark_no_delete: true, bookmark_no_edit: true,
-                     bookmark_embedly:  true
+                     bookmark_embedly:  true, bookmark_carousel:  false,
+                     debug_footer:      true
                    }
 %>
 
 <%= render partial: 'user_profile_report',
            locals: { rpt_tag: 'my-liked-blocmarks', title: 'Liked Blocmarks',
                      topics: @topics_with_user_liked_bookmarks,
-                     topic_no_delete: true, topic_no_edit: true,
+                     topic_no_delete:  true, topic_no_edit: true,
                      bookmark_no_edit: true,
-                     bookmark_embedly: true
+                     bookmark_embedly: true, bookmark_carousel:  false,
+                     debug_footer:     true
                     }
 %>

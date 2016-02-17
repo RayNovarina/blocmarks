@@ -1,15 +1,17 @@
-<% if bookmark_column == 0 %>
+<% if column == 0 %>
 <div class="row">
 <% end %>
   <div class="col-md-4">
     <div class="media">
       <div class="media-body">
-
         <% results = get_embed_card_preview_html(bookmark.url) %>
         <%= results[:response][:html] %>
+        <% if (defined? debug_footer).nil? == false && debug_footer %>
+          <%= render partial: 'bookmarks/bookmark_embedly_debug', locals: { topic: topic, bookmark: bookmark } %>
+        <% end %>
       </div>
     </div>
   </div>
-<% if bookmark_column == 2 %>
+<% if column == 2 %>
 </div>
 <% end %>

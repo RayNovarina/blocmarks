@@ -1,49 +1,32 @@
-<% if (defined? embedly).nil? == false && embedly %>
+<% if (defined? carousel).nil? == false && carousel %>
+  <%= render partial: '/bookmarks/bookmark_carousel',
+             locals: { topic: topic, bookmark: bookmark,
+                       num_items:    num_items,
+                       item_num:     item_num,
+                       no_likes:     (defined? no_likes).nil?       ? false : no_likes,
+                       no_delete:    (defined? no_delete).nil?      ? false : no_delete,
+                       no_edit:      (defined? no_edit).nil?        ? false : no_edit,
+                       debug_footer: (defined? debug_footer).nil?  ? false : debug_footer
+                     }
+  %>
+<% elsif (defined? embedly).nil? == false && embedly %>
   <%= render partial: '/bookmarks/bookmark_embedly',
              locals: { topic: topic, bookmark: bookmark,
-                       bookmark_column: bookmark_column,
-                       no_likes:  (defined? no_likes).nil?   ? false : no_likes,
-                       no_delete: (defined? no_delete).nil?  ? false : no_delete,
-                       no_edit:   (defined? no_edit).nil?    ? false : no_edit,
-                       embedly:   (defined? embedly).nil?    ? false : embedly
+                       item_num:     item_num,
+                       column:       bookmark_column,
+                       no_likes:     (defined? no_likes).nil?       ? false : no_likes,
+                       no_delete:    (defined? no_delete).nil?      ? false : no_delete,
+                       no_edit:      (defined? no_edit).nil?        ? false : no_edit,
+                       debug_footer: (defined? debug_footer).nil?  ? false : debug_footer
                      }
   %>
 <% else %>
-
-<div class="row">
-  <div class="col-md-12">
-    <div class="media">
-      <div class="media-body">
-        <h4 class="media-heading css-bookmark-container" style="background: white;">
-          <% if policy(Like).create? && ((defined? no_likes).nil? ? true : !no_likes) %>
-            <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
-          <% end %>
-            <span class="css-favicon" style="margin-left:40px; margin-right:2px;">
-              <%= link_to 'Favicon', bookmark.url, target: '_blank', class: 'btn btn-xs btn-info' %>
-            </span>
-            <span class="css-bookmark-title" style="overflow: hidden; text-decoration: underline;">
-              <%= link_to bookmark.title, bookmark.url, target: '_blank', title: "Created by: #{bookmark.user.name}" %>
-            <span>
-          <% if policy(bookmark).destroy? && ((defined? no_delete).nil? || no_delete == false) %>
-            <span class="pull-right css-bookmark-action" style="padding-top: 4px; padding-right: 4px;">
-              <%= link_to 'Remove', [topic, bookmark], method: :delete, class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure you want to delete this bookmark?'} %>
-            </span>
-          <% end %>
-          <% if policy(bookmark).edit? && ((defined? no_edit).nil? || no_edit == false) %>
-            <span class="pull-right css-bookmark-action" style="padding-top: 4px; padding-right: 4px;">
-              <%= link_to 'Edit', edit_topic_bookmark_path(topic, bookmark), class: 'btn btn-xs btn-success' %>
-            </span>
-          <% end %>
-        </h4>
-      </div>
-    </div>
-  </div>
-</div>
-<% end %>
-
-<% #= render partial: 'bookmarks/bookmark_debug_footer',
-  #        locals: { topic: topic,
-  #                   bookmark: bookmark,
-  #                   embedly:   (defined? embedly).nil?    ? false : embedly
-  #                 }
+  <%= render partial: '/bookmarks/bookmark_columns',
+           locals: { topic: topic, bookmark: bookmark,
+                     no_likes:     (defined? no_likes).nil?      ? false : no_likes,
+                     no_delete:    (defined? no_delete).nil?     ? false : no_delete,
+                     no_edit:      (defined? no_edit).nil?       ? false : no_edit,
+                     debug_footer: (defined? debug_footer).nil?  ? false : debug_footer
+                   }
 %>
+<% end %>

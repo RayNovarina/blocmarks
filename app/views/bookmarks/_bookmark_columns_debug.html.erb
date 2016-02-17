@@ -9,12 +9,20 @@
           </span>
           <br/>
           <span>
+            <%= "Created by #{bookmark.user.name.split(' ')[0]}" %>
+            <%= "#{time_ago_in_words(bookmark.created_at)} ago" %>
+          </span>
+          <span style="margin-left: 8px;">
             <%= "First liked by #{bookmark.likes.empty? ? 'NO ONE' : bookmark.likes[0].user.name.split(' ')[0]}"
             %>
           </span>
           <span style="margin-left: 8px;">
-            <%= "Created by #{bookmark.user.name.split(' ')[0]}" %>
-            <%= "#{time_ago_in_words(bookmark.created_at)} ago" %>
+            <%= "#{current_user.liked?(bookmark) ? "" : "Not "}Liked by #{current_user.name}" %>
+          </span>
+          <span style="margin-left: 8px;">
+            <%= "#{current_user.name.split(' ')[0]}'s authorizations: " \
+            "To like: #{LikePolicy.new(current_user, Like.new).create?}.   " \
+            "To unLike: #{LikePolicy.new(current_user, Like.new).destroy?}." %>
           </span>
         </h5>
       </div>

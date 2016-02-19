@@ -48,8 +48,8 @@ Config.rpt[:my_liked_blocmarks] = {
 #------- Report Bookmarks
 Config.rpt[:bmks] = {
   columns_style:            false,
-  embedly_style:            false,
-  embed_ray_style:          true,
+  embedly_style:            true,
+  embed_ray_style:          false,
   embed_side_by_side_style: false,
   carousel_style:           false
 }

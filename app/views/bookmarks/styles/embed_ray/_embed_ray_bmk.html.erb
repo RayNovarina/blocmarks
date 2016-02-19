@@ -1,0 +1,22 @@
+<% # col = 0, 1, 2  index % 3 = column position
+  column =
+    properties[:item_num] % Config.rpt[:bmks][:embedly][:bookmarks_per_row]
+%>
+<% if column == 0 %>
+  <div class="row">
+<% end %>
+    <div class="col-md-4">
+      <div class="media">
+        <div class="media-body">
+          <%= render partial: 'bookmarks/styles/embed_ray/embed_ray_card',
+                     locals: { properties: properties }
+          %>
+        </div>
+      </div>
+    </div>
+<% if (column == (Config.rpt[:bmks][:embed_ray][:bookmarks_per_row] - 1)) ||
+                 (properties[:item_num] == (properties[:num_items] - 1))
+%>
+  </div>
+  <hr style="margin-top: 10px; margin-bottom: 14px; color: black; border: solid 1px;">
+<% end %>

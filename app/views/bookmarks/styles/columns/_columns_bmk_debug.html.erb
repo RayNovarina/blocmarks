@@ -1,23 +1,22 @@
-<% if Rails.env.development? %>
 <div class="row">
   <div class="col-md-12">
     <div class="media">
       <div class="media-body">
         <h5 class="media-heading css-bookmark-container" style="background: yellow; font-size: 12px;">
           <span>
-            <%= "URL: #{bookmark.url}" %>
+            <%= "URL: #{properties[:bookmark].url}" %>
           </span>
           <br/>
           <span>
-            <%= "Created by #{bookmark.user.name.split(' ')[0]}" %>
-            <%= "#{time_ago_in_words(bookmark.created_at)} ago" %>
+            <%= "Created by #{properties[:bookmark].user.name.split(' ')[0]}" %>
+            <%= "#{time_ago_in_words(properties[:bookmark].created_at)} ago" %>
           </span>
           <span style="margin-left: 8px;">
-            <%= "First liked by #{bookmark.likes.empty? ? 'NO ONE' : bookmark.likes[0].user.name.split(' ')[0]}"
+            <%= "First liked by #{properties[:bookmark].likes.empty? ? 'NO ONE' : properties[:bookmark].likes[0].user.name.split(' ')[0]}"
             %>
           </span>
           <span style="margin-left: 8px;">
-            <%= "#{current_user.liked?(bookmark) ? "" : "Not "}Liked by #{current_user.name}" %>
+            <%= "#{current_user.liked?(properties[:bookmark]) ? "" : "Not "}Liked by #{current_user.name}" %>
           </span>
           <span style="margin-left: 8px;">
             <%= "#{current_user.name.split(' ')[0]}'s authorizations: " \
@@ -29,4 +28,3 @@
     </div>
   </div>
 </div>
-<% end %>

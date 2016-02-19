@@ -1,32 +1,21 @@
-<% if (defined? carousel).nil? == false && carousel %>
-  <%= render partial: '/bookmarks/bookmark_carousel',
-             locals: { topic: topic, bookmark: bookmark,
-                       num_items:    num_items,
-                       item_num:     item_num,
-                       no_likes:     (defined? no_likes).nil?       ? false : no_likes,
-                       no_delete:    (defined? no_delete).nil?      ? false : no_delete,
-                       no_edit:      (defined? no_edit).nil?        ? false : no_edit,
-                       debug_footer: (defined? debug_footer).nil?  ? false : debug_footer
-                     }
+<% if current_page?(controller: 'topics') || Config.rpt[:bmks][:columns_style] %>
+  <%= render partial: '/bookmarks/styles/columns/columns_bmk',
+             locals: { properties: properties }
   %>
-<% elsif (defined? embedly).nil? == false && embedly %>
-  <%= render partial: '/bookmarks/bookmark_embedly',
-             locals: { topic: topic, bookmark: bookmark,
-                       item_num:     item_num,
-                       column:       bookmark_column,
-                       no_likes:     (defined? no_likes).nil?       ? false : no_likes,
-                       no_delete:    (defined? no_delete).nil?      ? false : no_delete,
-                       no_edit:      (defined? no_edit).nil?        ? false : no_edit,
-                       debug_footer: (defined? debug_footer).nil?  ? false : debug_footer
-                     }
+<% elsif Config.rpt[:bmks][:embedly_style] %>
+  <%= render partial: '/bookmarks/styles/embedly/embedly_bmk',
+             locals: { properties: properties }
   %>
-<% else %>
-  <%= render partial: '/bookmarks/bookmark_columns',
-           locals: { topic: topic, bookmark: bookmark,
-                     no_likes:     (defined? no_likes).nil?      ? false : no_likes,
-                     no_delete:    (defined? no_delete).nil?     ? false : no_delete,
-                     no_edit:      (defined? no_edit).nil?       ? false : no_edit,
-                     debug_footer: (defined? debug_footer).nil?  ? false : debug_footer
-                   }
-%>
+<% elsif Config.rpt[:bmks][:embed_ray_style] %>
+  <%= render partial: '/bookmarks/styles/embed_ray/embed_ray_bmk',
+             locals: { properties: properties }
+  %>
+<% elsif Config.rpt[:bmks][:embed_side_by_side_style] %>
+  <%= render partial: '/bookmarks/styles/embed_side_by_side/embed_side_by_side_bmk',
+               locals: { properties: properties }
+  %>
+<% elsif Config.rpt[:bmks][:carousel_style] %>
+  <%= render partial: '/bookmarks/styles/carousel/carousel_bmk',
+             locals: { properties: properties }
+  %>
 <% end %>

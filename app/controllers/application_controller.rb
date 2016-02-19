@@ -1,4 +1,4 @@
-#
+# Config = Blocmarks::Application.config.x
 class ApplicationController < ActionController::Base
   # Use Pundit for authorization/permissions.
   include Pundit

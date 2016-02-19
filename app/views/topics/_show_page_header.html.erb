@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="col-md-2 css-header-links">
-    <% if policy(Bookmark).create? %>
+    <% if policy(Bookmark).create? && rpt_policy[:include_new_topic] %>
       <%= link_to 'New Bookmark', new_topic_bookmark_path(topic), class: 'btn btn-xs btn-primary pull-right' %>
     <% end %>
   </div>

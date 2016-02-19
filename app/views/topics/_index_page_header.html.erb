@@ -8,7 +8,7 @@
   </div>
 </div>
 <div class="col-md-2 css-header_links">
-  <% if policy(Topic).create? %>
+  <% if policy(Topic).create? && rpt_policy[:include_new_topic] %>
     <%= link_to 'New Topic', new_topic_path, class: 'btn btn-xs btn-primary pull-right' %>
   <% end %>
 </div>

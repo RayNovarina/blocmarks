@@ -7,10 +7,10 @@
             <%= link_to "##{topic.title}", topic, title: "Created by: #{topic.user.name}" %>
           </span>
           <span class="css-topic-title-actions" style="margin-left: 10px;">
-            <% unless (defined? no_delete).nil? ? false : no_delete %>
+            <% if rpt_policy(rpt_tag)[:include_edit] %>
               <span><%= link_to 'Edit', '', class: 'btn btn-xs btn-success' %></span>
             <% end %>
-            <% unless (defined? no_edit).nil? ? false : no_edit %>
+            <% if rpt_policy(rpt_tag)[:include_delete] %>
               <span><%= link_to 'Delete', '', class: 'btn btn-xs btn-danger' %></span>
             <% end %>
           </span>
@@ -22,28 +22,16 @@
   <main>
     <div class="row">
       <div class="col-md-12">
-        <% num_bookmarks = bookmarks.length
-           bookmarks.each_with_index do |bookmark, index|
-           #bookmark = bookmarks[0]
-           #index = 0
-           #num_bookmarks = 1
-           #bookmarks_per_row = 1
-        %>
+        <% bookmarks.each_with_index do |bookmark, index| %>
           <%= render partial: '/bookmarks/bookmark',
-                     locals: { topic: topic, bookmark: bookmark,
-                               num_items:    num_bookmarks,
-                               item_num:     index,
-                               # col = 0, 1, 2  index % 3 = column position?
-                               bookmark_column: index % bookmarks_per_row,
-                               no_likes:     (defined? bookmark_no_likes).nil?   ? false : bookmark_no_likes,
-                               no_delete:    (defined? bookmark_no_delete).nil?  ? false : bookmark_no_delete,
-                               no_edit:      (defined? bookmark_no_edit).nil?    ? false : bookmark_no_edit,
-                               embedly:      (defined? bookmark_embedly).nil?    ? false : bookmark_embedly,
-                               carousel:     (defined? bookmark_carousel).nil?   ? false : bookmark_carousel,
-                               debug_footer: (defined? debug_footer).nil?        ? false : debug_footer
+                     locals: { properties:
+                                 { topic: topic, bookmark: bookmark,
+                                   num_items: bookmarks.length,
+                                   item_num: index
+                                  }
                              }
           %>
-          <% empty_bookmark_columns = num_bookmarks  % bookmarks_per_row %>
+          <% #empty_bookmark_columns = num_bookmarks  % bookmarks_per_row %>
         <% end %>
       </div>
     </div>

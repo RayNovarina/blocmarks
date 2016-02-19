@@ -8,6 +8,18 @@ module ApplicationHelper
   #         for VIEWS
   #===========================
 
+  #====================== Report configurations ======
+  def rpt_policy(rpt_tag = nil)
+    # rpt_policy[:include_new_bookmark]
+    if current_page?(controller: 'topics', action: 'index')
+      Config.rpt[:topic_idx]
+    elsif current_page?(controller: 'topics', action: 'show')
+      Config.rpt[:topic_shw]
+    elsif current_page?(controller: 'users', action: 'show')
+      Config.rpt[rpt_tag.to_sym]
+    end
+  end
+
   #====================== Embedly ====================
   # per: https://github.com/embedly/embedly-ruby
   # per: http://stackoverflow.com/questions/28622912/using-embedly-with-rails
@@ -65,11 +77,15 @@ module ApplicationHelper
   #      scaled up and embeds larger than this width will be scaled down.
   #      Note that using this may cause distortion when scaling up embeds.
   #   autoplay:	Boolean
-  #   This will tell the video/rich media to automatically play when the media is loaded. Accepted values: (true, false) Default: false
-  #   words:	String50
-  #   The words parameter works by trying to split the description at the closest sentence to that word count
+  #      This will tell the video/rich media to automatically play when the
+  #      media is loaded. Accepted values: (true, false) Default: false
+  #   words:	String
+  #      The words parameter works by trying to split the description at the
+  #      closest sentence to that word count
   #   chars:	String
-  #   chars is much simpler than words. Embedly will blindly truncate a description to the number of characters you specify adding ... at the end when needed.
+  #      chars is much simpler than words. Embedly will blindly truncate a
+  #      description to the number of characters you specify adding ... at the
+  #      end when needed.
   #   title:	String
   #       With title Embedly will set the title response attribute to the
   #      open_graph, meta, or twitter title if available in the page.
@@ -90,9 +106,9 @@ module ApplicationHelper
     when 'oembed'
       obj = embedly_api.oembed url:            url,
                                width:          330,
-                               maxheight:      400,
                                title:       'meta',
-                               description: 'meta'
+                               description: 'meta',
+                               words:        '30'
     end
     obj.first
   end
@@ -243,42 +259,5 @@ module ApplicationHelper
     # .html_safe is not used, the .erb helper '<%= html %>' will just insert
     # text, i.e. 'lt&;a href=\"....'
     card_html.html_safe
-  end
-
-  #-----------------------------------------------------------
-  #======== General controller extensions with model. ========
-  def return_view_hash_of(url_params, action_hash)
-    action_hash[:params] = url_params
-    action_hash[:controller] = url_params[:controller]
-    action_hash[:action] = url_params[:action]
-    action_hash[:page_name] =
-      "#{action_hash[:controller]}-#{action_hash[:action]}"
-    action_hash
-  end
-  #
-  # For HTML header tag in the views.
-  #   Example:  /views/devise/registrations/new.html.erb
-  #     <% page_header "Sign Up" %>
-  #     Gets inserted into the .erb page via /views/layouts/application.html.erb
-  #       <h1><%= yield :page_header %></h1>
-
-  def page_title(text)
-    content_for(:page_title) { text.to_s }
-  end
-
-  def override_page_footer_nav(text)
-    content_for(:override_page_footer_nav) { text.to_s }
-  end
-
-  def override_page_header_navbar(text)
-    content_for(:override_page_header_navbar) { text.to_s }
-  end
-
-  def page_main_header_other_messages(text)
-    content_for(:page_main_header_other_messages) { text.to_s }
-  end
-
-  def page_main_footer(text)
-    content_for(:page_main_footer) { text.to_s }
   end
 end

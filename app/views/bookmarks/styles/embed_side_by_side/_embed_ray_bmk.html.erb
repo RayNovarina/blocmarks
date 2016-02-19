@@ -1,0 +1,46 @@
+<% if props.embed_side_by_side %>
+</div>
+  </div>
+    </div>
+    <div class="col-md-4">
+  <div class="media">
+<div class="media-body">
+<% end %>
+
+<div class="embedly-card">
+<div class="embedly-card-hug" style="width: 320px; padding: 0px; position: relative; max-width: 100%; margin: 5px 0px;">
+
+  <iframe id="emb_mha3e0"
+          src ="<%= topic_bookmark_embedly_iframe_path(topic, bookmark) %>"
+          class="embedly-card" width="320" height="366" frameborder="0" scrolling="no" allowtransparency="true"
+          allowfullscreen="true"
+          style="border: medium none; position: relative; visibility: visible; display: block; margin: 0px;
+                 padding: 0px; max-width: 100%; min-width: 200px;"
+  >
+  </iframe>
+
+  <% #add class embd-active to show share links %>
+  <div class="embdscl0 ">
+    <a class="embd-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2Fusers%2F2%23e.mha3e0.ut4epo">
+      <i></i>
+    </a>
+    <a class="embd-twitter" href="https://twitter.com/intent/tweet?text=Active%20Record%20Associations%20-%20Ruby%20on%20Rails%20Guides&url=http%3A%2F%2Flocalhost%3A3000%2Fusers%2F2%23e.mha3e0.ut4epo&via=embedly">
+      <i></i>
+    </a>
+    <a class="embd-pinterest" href="https://www.pinterest.com/pin/create/button/?description=Active%20Record%20Associations%20-%20Ruby%20on%20Rails%20Guides&media=http%3A%2F%2Fguides.rubyonrails.org%2Fimages%2Fhas_many_through.png&url=http%3A%2F%2Flocalhost%3A3000%2Fusers%2F2%23e.mha3e0.ut4epo">
+      <i></i>
+    </a>
+    <a class="embd-card">
+      <i></i>
+    </a>
+    <a class="embd-embedly" href="http://embed.ly/cards?utm_campaign=cards&utm_medium=referral&utm_source=null" target="_blank">
+      <i></i>
+    </a>
+  </div>
+
+</div>
+</div>
+
+<% if (defined? props.rpt_debug_footer %>
+  <%= render partial: 'bookmarks/bookmark_embed_ray_debug', locals: { topic: topic, bookmark: bookmark } %>
+<% end %>

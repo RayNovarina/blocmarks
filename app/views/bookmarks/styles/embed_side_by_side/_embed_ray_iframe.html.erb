@@ -1,0 +1,82 @@
+<% bookmark = @bookmark
+   results = get_embed_card_preview_html(bookmark.url)
+   request = results[:request]
+   api_response = results[:response][:api_response]
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link type="text/css" rel="stylesheet"
+        href="http://cdn.embedly.com/css/all.3df65bc7.css">
+  </link>
+</head>
+<body id="cards"
+      class="no-touch boxshadow borderradius rgba mediaquery card-bd ltr font-wf-sans border-blockquote theme-light"
+      style="">
+  <script type="text/javascript"
+          src="http://cdn.embedly.com/js/all.3df65bc7.js">
+  </script>
+  <div class="card article">
+    <div class="hdr">
+      <div class="provider provider-gt-35" style="min-height: 19px;">
+        <img class="provider-favicon"
+             width="16"
+             height="16"
+             src="<%= "#{(defined? api_response.favicon_url).nil? ? 'http://guides.rubyonrails.org/images/favicon.ico' : api_response.favicon_url}" %>"
+        <a class="provider-name" href="<%= "#{api_response.provider_url}" %>"
+           target="_blank"
+           ><%= "#{api_response.provider_name.upcase}" %>
+        </a>
+        <span class="author"> </span>
+      </div>
+    </div>
+
+    <div class="bd"
+         style="border-left-color: rgb(161, 28, 16);">
+
+      <div class="pair-bd">
+        <div class="art-bd"
+             style="overflow: hidden; width: 300px; max-height:142px; overflow:hidden;">
+          <a class=""
+             style="padding-bottom: 0; background-color: rgb(255, 255, 255);"
+             href="<%= "#{api_response.url}" %>"
+             target="_blank">
+            <img class=""
+                 style="width:100%; min-height: 142px;"
+                 src="<%= "#{(defined? api_response.thumbnail_url).nil? ? api_response.url : api_response.thumbnail_url}" %>"
+            >
+          </a>
+        </div>
+
+        <div class="txt-bd">
+          <h1 class="title">
+            <a href="<%= "#{api_response.url}" %>"
+               target="_blank"
+               ><%= "#{api_response.title}" %>
+            </a>
+          </h1>
+
+          <p class="description"
+             ><%= "#{api_response.description}" %>
+          </p>
+
+          <a class="action"
+             href="<%= "#{api_response.url}" %>"
+             target="_blank"
+             ><%= "#{ (api_response.type == 'link' ?
+                       'Read this on' :
+                       api_response.type == 'photo' ?
+                       'View this photo at' :
+                       'Full video at'
+                      )
+                    } #{api_response.provider_url.split('http://')[1]}" %>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

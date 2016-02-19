@@ -70,6 +70,11 @@ class BookmarksController < ApplicationController
     end
   end
 
+  def embed_ray_iframe
+    @bookmark = Bookmark.find(params[:id])
+    render partial: '/bookmarks/styles/embed_ray/embed_ray_iframe'
+  end
+
   private
 
   def bookmark_params_whitelist

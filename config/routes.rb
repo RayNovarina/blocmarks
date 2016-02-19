@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :topics do
     resources :bookmarks, only: [:new, :create, :edit, :update, :destroy]
   end
+  get '/topics/:topic_id/bookmarks/:id/embed_ray_iframe', to: 'bookmarks#embed_ray_iframe', as: 'topic_bookmark_embed_ray_iframe'
 
   resources :bookmarks, only: [] do
     resources :likes, only: [:index, :create, :destroy]

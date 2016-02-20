@@ -1,4 +1,4 @@
-<% if item_num == 0 %>
+<% if properties[:item_num] == 0 %>
   <div id="myCarousel" class="carousel slide"
        data-ride="carousel" data-interval="false" data-wrap="true"
   >
@@ -12,6 +12,12 @@
       <li data-target="#myCarousel" data-slide-to="4"></li>
       <li data-target="#myCarousel" data-slide-to="5"></li>
       <li data-target="#myCarousel" data-slide-to="6"></li>
+      <li data-target="#myCarousel" data-slide-to="7"></li>
+      <li data-target="#myCarousel" data-slide-to="8"></li>
+      <li data-target="#myCarousel" data-slide-to="9"></li>
+      <li data-target="#myCarousel" data-slide-to="10"></li>
+      <li data-target="#myCarousel" data-slide-to="11"></li>
+      <li data-target="#myCarousel" data-slide-to="12"></li>
     </ol>
     <!-- End: Item Indicators -->
 
@@ -19,22 +25,18 @@
     <div class="carousel-inner" role="listbox">
 <% end %>
 
-      <!-- Begin: slide item <%= item_num %> -->
-      <div class="item<%= item_num == 0 ? " active" : ""%>">
+      <!-- Begin: slide item <%= properties[:item_num] %> -->
+      <div class="item<%= properties[:item_num] == 0 ? " active" : ""%>">
         <div class="col-md-12">
           <div class="span12" style="padding-left: 48px;">
-            <% results = get_embed_card_preview_html(bookmark.url) %>
-            <% #= results[:response][:html]
-            require 'pry'
-            binding.pry %>
+            <% results = get_embed_card_preview_html(properties[:bookmark].url) %>
             <img src="<%= results[:response][:api_response].thumbnail_url %>">
-
           </div>
         </div>
       </div>
-      <!-- End: slide item <%= item_num %> -->
+      <!-- End: slide item <%= properties[:item_num] %> -->
 
-<% if item_num == (num_items - 1) %>
+<% if properties[:item_num] == (properties[:item_num] - 1) %>
     </div>
     <!-- End: Wrapper for slides -->
 
@@ -50,8 +52,4 @@
         <!-- End: Left and right controls -->
 
   </div>
-<% end %>
-
-<% if false #(defined? debug_footer).nil? == false && debug_footer %>
-  <%= render partial: 'bookmarks/bookmark_carousel_debug', locals: { topic: topic, bookmark: bookmark } %>
 <% end %>

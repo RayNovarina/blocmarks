@@ -9,15 +9,82 @@ module ApplicationHelper
   #===========================
 
   #====================== Report configurations ======
-  def rpt_policy(rpt_tag = nil)
-    # rpt_policy[:include_new_bookmark]
-    if current_page?(controller: 'topics', action: 'index')
-      Config.rpt[:topic_idx]
-    elsif current_page?(controller: 'topics', action: 'show')
-      Config.rpt[:topic_shw]
-    elsif current_page?(controller: 'users', action: 'show')
-      Config.rpt[rpt_tag.to_sym]
+  #
+
+  # Example1: <%= render partial: 'index_page_header',
+  #                      locals: { props: properties(title: 'All Blocmarks', topics: @topics) } %>
+  # Becomes:  locals: { props: {
+  #                       title: 'All Blocmarks', topics: @topics,
+  #                       rpt: Config.rpt[:topics_index]
+  #                     }
+  #                   }
+  # Useage for above example in the partial to be rendered:
+  #           if rpt_topic(props)[:include_new_topic]
+  # Example2: <%= render partial: '/bookmarks/styles/columns/columns_bmk',
+  #                      locals: { props: props }
+  #          %>
+  def properties(locals_hash = nil, rpt_tag = nil)
+    # require 'pry'
+    # binding.pry
+    # ret = locals_hash.merge(rpt: rpt_config(rpt_tag)) unless locals_hash.nil?
+    # ret = { rpt: rpt_config(rpt_tag) } if locals_hash.nil?
+    if locals_hash.nil?
+      ret = { rpt_tag: rpt_tag, rpt: rpt_config(rpt_tag) }
+    else
+      ret = locals_hash
+      ret[:rpt_tag] = rpt_tag
+      ret[:rpt] = rpt_config(rpt_tag)
     end
+    # require 'pry'
+    # binding.pry
+    ret
+  end
+
+  # Example1: props = rpt_config   or props = properites()
+  #  Returns: (if on the topics index page):
+  #           Config.rpt[:topics_index][:reports][:topics_index]
+  # Example2: props = rpt_config('my_blocmarks')
+  #  Returns: Config.rpt[:users_show][:reports][:my_blocmarks]
+  #  To Use:  if rpt_topic(props)[:include_new_topic]
+  #            or
+  #          if rpt_config('my_blocmarks')[:topic][:include_new_bookmark]
+  #
+  def rpt_config(rpt_tag = nil)
+    # require 'pry'
+    # binding.pry
+    rpt_sym = "#{params[:controller]}_#{params[:action]}".to_sym
+    ret = Config.rpt[rpt_sym][:reports][rpt_tag.nil? ? rpt_sym : rpt_tag.to_sym]
+    # require 'pry'
+    # binding.pry
+    ret
+  end
+
+  #====================== Topic configuration ======
+  #
+  # Example1: Assume we already have inherited properties.
+  #  Returns: (if on the topics index page):
+  #           Config.rpt[:topics_index][:reports][:topics_index][:topic]
+  #  To Use: if rpt_topic(props)[:include_new_topic]
+  def rpt_topic(props_hash = nil)
+    ret = (props_hash.nil? ? rpt_config(nil) : props_hash)[:rpt][:topic]
+    # require 'pry'
+    # binding.pry
+    ret
+  end
+
+  #====================== Bookmark configuration ======
+  #
+  # Example1: Assume we already have inherited properties.
+  #  Returns: (if on the topics index page):
+  #           Config.rpt[:topics_index][:reports][:topics_index][:bookmark]
+  #  To Use: if rpt_bmk(props)[:include_likes]
+  def rpt_bmk(props_hash = nil)
+    # require 'pry'
+    # binding.pry
+    ret = (props_hash.nil? ? rpt_config(nil) : props_hash)[:rpt][:bookmark]
+    # require 'pry'
+    # binding.pry
+    ret
   end
 
   #====================== Embedly ====================

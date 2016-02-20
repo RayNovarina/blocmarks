@@ -1,13 +1,18 @@
+<% #require 'pry'
+#binding.pry %>
+
 <header style="margin-bottom:30px;">
   <div class="row">
-    <%= render partial: 'index_page_header', locals: { topics: @topics } %>
+    <%= render partial: 'index_page_header',
+               locals: { props: properties(title: 'All Blocmarks', topics: @topics) } %>
   </div>
 </header>
 
 <main>
   <div class="row">
     <div class="col-md-12">
-      <%= render @topics %>
+      <% props = properties(topics: @topics) %>
+      <%= render @topics, props: props %>
     </div>
   </div>
 </main>

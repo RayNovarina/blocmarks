@@ -3,8 +3,8 @@
     <div class="col-md-8 css-page_title">
       <div class="media">
         <div class="media-body">
-          <h2 class="media-heading" title='<%= bookmark.new_record? ? "" : "Created by: #{bookmark.user.name}" %>'>
-            <%= bookmark.new_record? ? 'New' : 'Edit' %> Bookmark
+          <h2 class="media-heading" title='<%= props[:bookmark].new_record? ? "" : "Created by: #{props[:bookmark].user.name}" %>'>
+            <%= props[:bookmark].new_record? ? 'New' : 'Edit' %> Bookmark
           </h2>
         </div>
       </div>
@@ -24,9 +24,10 @@
       </ul>
     </div>
     <div class="col-md-4">
-      <%= render partial: 'new_edit_parent_topic', locals: { topic: topic } %>
-      <%= render partial: 'shared/errors', locals: { obj: bookmark } %>
-      <%= render partial: 'new_edit_form', locals: { topic: topic, bookmark: bookmark } %>
+      <% props[:obj] = props [:bookmark] %>
+      <%= render partial: 'new_edit_parent_topic', locals: { props: props } %>
+      <%= render partial: 'shared/errors', locals: { props: props } %>
+      <%= render partial: 'new_edit_form', locals: { props: props } %>
     </div>
   </div>
 </main>

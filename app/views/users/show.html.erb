@@ -1,11 +1,19 @@
 <%= render partial: 'user_profile_report',
-           locals: { rpt_tag: 'my_blocmarks', title: 'My Blocmarks',
-                     topics: @topics_with_user_bookmarks
+           locals: { props: properties(
+                              { title: 'My Blocmarks',
+                                topics: @topics_with_user_bookmarks
+                              },
+                              'my_blocmarks'
+                            )
                    }
 %>
 
 <%= render partial: 'user_profile_report',
-           locals: { rpt_tag: 'my_liked_blocmarks', title: 'Liked Blocmarks',
-                     topics: @topics_with_user_liked_bookmarks
-                    }
+           locals: { props: properties(
+                              { title: 'Liked Blocmarks',
+                                topics: @topics_with_user_liked_bookmarks
+                              },
+                              'my_liked_blocmarks'
+                            )
+                   }
 %>

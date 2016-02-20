@@ -1,21 +1,21 @@
-<% if current_page?(controller: 'topics') || Config.rpt[:bmks][:columns_style] %>
+<% if rpt_bmk(props)[:style] == :columns %>
   <%= render partial: '/bookmarks/styles/columns/columns_bmk',
-             locals: { properties: properties }
+             locals: { props: props }
   %>
-<% elsif Config.rpt[:bmks][:embedly_style] %>
+<% elsif rpt_bmk(props)[:style] == :embedly %>
   <%= render partial: '/bookmarks/styles/embedly/embedly_bmk',
-             locals: { properties: properties }
+             locals: { props: props }
   %>
-<% elsif Config.rpt[:bmks][:embed_ray_style] %>
+<% elsif rpt_bmk(props)[:style] == :embed_ray %>
   <%= render partial: '/bookmarks/styles/embed_ray/embed_ray_bmk',
-             locals: { properties: properties }
+             locals: { props: props }
   %>
-<% elsif Config.rpt[:bmks][:embed_side_by_side_style] %>
+<% elsif rpt_bmk(props)[:style] == :embed_side_by_side %>
   <%= render partial: '/bookmarks/styles/embed_side_by_side/embed_side_by_side_bmk',
-               locals: { properties: properties }
+             locals: { props: props }
   %>
-<% elsif Config.rpt[:bmks][:carousel_style] %>
+<% elsif rpt_bmk(props)[:style] == :carousel %>
   <%= render partial: '/bookmarks/styles/carousel/carousel_bmk',
-             locals: { properties: properties }
+             locals: { props: props }
   %>
 <% end %>

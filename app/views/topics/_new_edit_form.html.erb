@@ -1,5 +1,5 @@
 <div class="css-new_edit_form">
-  <%= form_for topic  do |f| %>
+  <%= form_for props[:topic]  do |f| %>
 
     <%= f.label :title %><br />
     <%= f.text_field :title, autofocus: true, class: 'form-control', placeholder: 'Enter topic title' %>
@@ -8,7 +8,7 @@
     <%= f.text_area :description, rows: 2, class: 'form-control', placeholder: 'Enter topic description' %>
 
     <div class="css-actions">
-      <%= f.submit(topic.new_record? ? 'Create Topic' : 'Update Topic', class: 'btn btn-primary') %>
+      <%= f.submit(props[:topic].new_record? ? 'Create Topic' : 'Update Topic', class: 'btn btn-primary') %>
     </div>
   <% end %>
 </div>

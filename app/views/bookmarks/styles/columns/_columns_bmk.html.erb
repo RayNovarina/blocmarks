@@ -3,26 +3,26 @@
     <div class="media">
       <div class="media-body">
         <h4 class="media-heading css-bookmark-container" style="background: white;">
-          <% if policy(Like).create? && Config.bmk_columns[:include_likes] %>
-            <%= render partial: 'likes/like', locals: { properties: properties } %>
+          <% if policy(Like).create? && rpt_bmk(props)[:include_likes] %>
+            <%= render partial: 'likes/like', locals: { props: props } %>
           <% end %>
             <span class="css-favicon" style="margin-left:40px; margin-right:2px;">
-              <%= link_to 'Favicon', properties[:bookmark].url, target: '_blank', class: 'btn btn-xs btn-info' %>
+              <%= link_to 'Favicon', props[:bookmark].url, target: '_blank', class: 'btn btn-xs btn-info' %>
             </span>
             <span class="css-bookmark-title" style="overflow: hidden; text-decoration: underline;">
-              <%= link_to properties[:bookmark].title, properties[:bookmark].url, target: '_blank',
-                          title: "Created by: #{properties[:bookmark].user.name}" %>
+              <%= link_to props[:bookmark].title, props[:bookmark].url, target: '_blank',
+                          title: "Created by: #{props[:bookmark].user.name}" %>
             <span>
-          <% if policy(properties[:bookmark]).destroy? && Config.bmk_columns[:include_delete] %>
+          <% if policy(props[:bookmark]).destroy? && rpt_bmk(props)[:include_delete] %>
             <span class="pull-right css-bookmark-action" style="padding-top: 4px; padding-right: 4px;">
-              <%= link_to 'Remove', [properties[:topic], properties[:bookmark]], method: :delete,
+              <%= link_to 'Remove', [props[:topic], props[:bookmark]], method: :delete,
                           class: 'btn btn-xs btn-danger',
                           data: {confirm: 'Are you sure you want to delete this bookmark?'} %>
             </span>
           <% end %>
-          <% if policy(properties[:bookmark]).edit? && Config.bmk_columns[:include_edit] %>
+          <% if policy(props[:bookmark]).edit? && rpt_bmk(props)[:include_edit] %>
             <span class="pull-right css-bookmark-action" style="padding-top: 4px; padding-right: 4px;">
-              <%= link_to 'Edit', edit_topic_bookmark_path(properties[:topic], properties[:bookmark]),
+              <%= link_to 'Edit', edit_topic_bookmark_path(props[:topic], props[:bookmark]),
                           class: 'btn btn-xs btn-success' %>
             </span>
           <% end %>
@@ -32,5 +32,5 @@
   </div>
 </div>
 <% if Config.bmk_columns[:debug_footer] %>
-  <%= render partial: 'bookmarks/styles/columns/columns_bmk_debug', locals: { properties: properties } %>
+  <%= render partial: 'bookmarks/styles/columns/columns_bmk_debug', locals: { props: props } %>
 <% end %>

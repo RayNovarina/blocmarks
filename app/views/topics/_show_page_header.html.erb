@@ -4,15 +4,15 @@
   <div class="col-md-8 css-page_title">
     <div class="media">
       <div class="media-body">
-        <h2 class="media-heading text-center" title='<%= "Created by: #{topic.user.name}" %>'>
-          #<%= topic.title.downcase.capitalize %>
+        <h2 class="media-heading text-center" title='<%= "Created by: #{props[:topic].user.name}" %>'>
+          #<%= props[:topic].title.downcase.capitalize %>
         </h2>
       </div>
     </div>
   </div>
   <div class="col-md-2 css-header-links">
-    <% if policy(Bookmark).create? && rpt_policy[:include_new_topic] %>
-      <%= link_to 'New Bookmark', new_topic_bookmark_path(topic), class: 'btn btn-xs btn-primary pull-right' %>
+    <% if policy(Bookmark).create? && rpt_topic(props)[:include_new_topic] %>
+      <%= link_to 'New Bookmark', new_topic_bookmark_path(props[:topic]), class: 'btn btn-xs btn-primary pull-right' %>
     <% end %>
   </div>
 </div>
@@ -21,7 +21,7 @@
   <div class="col-md-2">
   </div>
   <div class="col-md-8 text-center css-header-desc" style="margin-bottom: 10px;">
-    <%= topic.description %>
+    <%= props[:topic].description %>
   </div>
   <div class="col-md-2">
   </div>
@@ -31,11 +31,11 @@
   <div class="col-md-2">
   </div>
   <div class="col-md-8 text-center css-header-desc-links" style="margin-bottom: 16px;">
-    <% if policy(topic).edit? %>
+    <% if policy(props[:topic]).edit? %>
         <%= link_to 'Edit', edit_topic_path, class: 'btn btn-xs btn-success' %>
     <% end %>
-    <% if policy(topic).destroy? %>
-      <%= link_to 'Delete', topic, method: :delete, class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure you want to delete this topic?'} %>
+    <% if policy(props[:topic]).destroy? %>
+      <%= link_to 'Delete', props[:topic], method: :delete, class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure you want to delete this topic?'} %>
     <% end %>
   </div>
   <div class="col-md-2">

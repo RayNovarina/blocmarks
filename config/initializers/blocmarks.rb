@@ -20,59 +20,136 @@ Config.rpt = {
   debug_footer: false
 }
 #------- Report Topics - index
-Config.rpt[:topic_idx] = {
-  include_new_topic: true,
-  include_new_bookmark: true,
-  include_delete:  false,
-  include_edit:    false
+Config.rpt[:topics_index] = {
+  reports: {
+    topics_index: {
+      topic: {
+        include_new_topic:     true,
+        include_new_bookmark:  true,
+        include_delete:        false,
+        include_edit:          false
+      },
+      bookmark: {
+        style:              :columns,
+        include_likes:      true,
+        include_delete:     true,
+        include_edit:       true
+      }
+    }
+  }
 }
 #------- Report Topics - show
-Config.rpt[:topic_shw] = {
-  include_new_topic: true,
-  include_new_bookmark: true,
-  include_delete:  true,
-  include_edit:    true
+Config.rpt[:topics_show] = {
+  reports: {
+    topics_show: {
+      topic: {
+        include_new_topic:     false,
+        include_new_bookmark:  true,
+        include_delete:        true,
+        include_edit:          true
+      },
+      bookmark: {
+        style:              :columns,
+        include_likes:      true,
+        include_delete:     true,
+        include_edit:       true
+      }
+    }
+  }
 }
-#------- Report Topics - my bookmarks
-Config.rpt[:my_blocmarks] = {
-  include_new_bookmark: true,
-  include_delete:  true,
-  include_edit:    true
+#------- Report Topics - new
+Config.rpt[:topics_new] = {
+  reports: {
+    topics_new: {
+      topic: {
+      }
+    }
+  }
 }
-#------- Report Topics - liked bookmarks
-Config.rpt[:my_liked_blocmarks] = {
-  include_new_bookmark: true,
-  include_delete:  true,
-  include_edit:    true
+#------- Report Topics - edit
+Config.rpt[:topics_edit] = {
+  reports: {
+    topics_edit: {
+      topic: {
+        include_delete:        true
+      }
+    }
+  }
 }
-#------- Report Bookmarks
+#------- Report Topics - User profile
+Config.rpt[:users_show] = {
+  reports: {
+    my_blocmarks: {
+      topic: {
+        include_new_topic:     false,
+        include_new_bookmark:  true,
+        include_delete:        true,
+        include_edit:          true
+      },
+      bookmark: {
+        style:              :columns,
+        include_likes:      false,
+        include_delete:     true,
+        include_edit:       true
+      }
+    },
+    my_liked_blocmarks: {
+      topic: {
+        include_new_topic:     false,
+        include_new_bookmark:  false,
+        include_delete:        false,
+        include_edit:          false
+      },
+      bookmark: {
+        style:              :columns,
+        include_likes:      true,
+        include_delete:     false,
+        include_edit:       false
+      }
+    }
+  }
+}
+#------- Report Bookmarks - new
+Config.rpt[:bookmarks_new] = {
+  reports: {
+    bookmarks_new: {
+      bookmark: {
+      }
+    }
+  }
+}
+#------- Report Bookmarks - edit
+Config.rpt[:bookmarks_edit] = {
+  reports: {
+    bookmarks_edit: {
+      bookmark: {
+        include_delete:        true
+      }
+    }
+  }
+}
+#------- Bookmarks partial
 Config.rpt[:bmks] = {
   columns_style:            false,
-  embedly_style:            true,
-  embed_ray_style:          false,
+  embedly_style:            false,
+  embed_ray_style:          true,
   embed_side_by_side_style: false,
   carousel_style:           false
 }
 #
 #---------------
-# Report Bookmarks columns style.
+# Bookmarks partial: columns style.
 Config.rpt[:bmks][:columns] = {
   bookmarks_per_row:  2,
-  debug_footer:       false,
-  include_likes:      true,
-  include_delete:     true,
-  include_edit:       true
+  debug_footer:       false
 }
 Config.bmk_columns = Config.rpt[:bmks][:columns]
 #
 #-------------------
-# Report Bookmarks embedly style.
+# Bookmarks partial:  embedly style.
 Config.rpt[:bmks][:embedly] = {
   bookmarks_per_row:  3,
-  debug_footer:       false,
-  include_likes:      true,
-  include_delete:     true,
-  include_edit:       true
+  debug_footer:       false
 }
 Config.bmk_embedly = Config.rpt[:bmks][:embedly]
 #
@@ -80,31 +157,22 @@ Config.bmk_embedly = Config.rpt[:bmks][:embedly]
 # Report Bookmarks embed_ray style.
 Config.rpt[:bmks][:embed_ray] = {
   bookmarks_per_row:  3,
-  debug_footer:       false,
-  include_likes:      true,
-  include_delete:     true,
-  include_edit:       true
+  debug_footer:       false
 }
 Config.bmk_embed_ray = Config.rpt[:bmks][:embed_ray]
 #
 #-------------------
-# Report Bookmarks embed_side_by_side style.
+# Bookmarks partial:  embed_side_by_side style.
 Config.rpt[:bmks][:embed_side_by_side] = {
-  bookmarks_per_row:  2,
-  debug_footer:       false,
-  include_likes:      true,
-  include_delete:     true,
-  include_edit:       true
+  bookmarks_per_row:  1,
+  debug_footer:       false
 }
 Config.bmk_embed_side_by_side = Config.rpt[:bmks][:embed_side_by_side]
 #
 #-------------------
-# Report Bookmarks carousel style.
+# Bookmarks partial:  carousel style.
 Config.rpt[:bmks][:carousel] = {
   bookmarks_per_row:  3,
-  debug_footer:       false,
-  include_likes:      true,
-  include_delete:     true,
-  include_edit:       true
+  debug_footer:       false
 }
 Config.bmk_carousel = Config.rpt[:bmks][:carousel]

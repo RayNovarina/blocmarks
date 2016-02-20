@@ -1,14 +1,17 @@
+<% #require 'pry'
+#binding.pry %>
+
 <div class="col-md-2">
 </div>
 <div class="col-md-8 css-page_title">
   <div class="media">
     <div class="media-body">
-      <h2 class="media-heading text-center">All Blocmarks</h2>
+      <h2 class="media-heading text-center"><%= props[:title] %></h2>
     </div>
   </div>
 </div>
 <div class="col-md-2 css-header_links">
-  <% if policy(Topic).create? && rpt_policy[:include_new_topic] %>
+  <% if policy(Topic).create? && rpt_topic(props)[:include_new_topic] %>
     <%= link_to 'New Topic', new_topic_path, class: 'btn btn-xs btn-primary pull-right' %>
   <% end %>
 </div>

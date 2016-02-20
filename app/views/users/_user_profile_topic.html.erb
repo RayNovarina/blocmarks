@@ -4,13 +4,13 @@
       <div class="col-md-12">
         <h4 class="media-heading css-topic-title">
           <span style="text-decoration: underline; font-size: 24px;">
-            <%= link_to "##{topic.title}", topic, title: "Created by: #{topic.user.name}" %>
+            <%= link_to "##{props[:topic].title}", props[:topic], title: "Created by: #{props[:topic].user.name}" %>
           </span>
           <span class="css-topic-title-actions" style="margin-left: 10px;">
-            <% if rpt_policy(rpt_tag)[:include_edit] %>
+            <% if rpt_topic(props)[:include_edit] %>
               <span><%= link_to 'Edit', '', class: 'btn btn-xs btn-success' %></span>
             <% end %>
-            <% if rpt_policy(rpt_tag)[:include_delete] %>
+            <% if rpt_topic(props)[:include_delete] %>
               <span><%= link_to 'Delete', '', class: 'btn btn-xs btn-danger' %></span>
             <% end %>
           </span>
@@ -22,15 +22,17 @@
   <main>
     <div class="row">
       <div class="col-md-12">
-        <% bookmarks.each_with_index do |bookmark, index| %>
+        <% props[:bookmarks].each_with_index do |bookmark, index| %>
           <%= render partial: '/bookmarks/bookmark',
-                     locals: { properties:
-                                 { topic: topic, bookmark: bookmark,
-                                   num_items: bookmarks.length,
-                                   item_num: index
-                                  }
-                             }
-          %>
+                     locals: { props: properties(
+                                        { topic: props[:topic],
+                                          num_items: props[:bookmarks].length,
+                                          bookmark: bookmark,
+                                          item_num: index
+                                        },
+                                        props[:rpt_tag]
+                                      )
+                             } %>
           <% #empty_bookmark_columns = num_bookmarks  % bookmarks_per_row %>
         <% end %>
       </div>

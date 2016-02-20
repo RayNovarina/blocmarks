@@ -1,17 +1,16 @@
-<div class="css-<%= rpt_tag %>-rpt" style="margin-bottom: 40px;">
+<div class="css-<%= props[:rpt_tag] %>-rpt" style="margin-bottom: 40px;">
   <header style="margin-bottom:10px;">
     <div class="row">
-      <h2 class="media-heading text-center"><%= title %></h2>
+      <h2 class="media-heading text-center"><%= props[:title] %></h2>
     </div>
   </header>
 
-  <% topics.each do |topic| %>
-    <%= render partial: 'user_profile_topic',
-               locals: { rpt_tag: rpt_tag, topic: topic,
-                         bookmarks:  (rpt_tag == 'my_blocmarks') \
-                            ? topic.bookmarks_by_user(current_user) \
-                            : topic.bookmarks_by_user_liked(current_user)
-                       }
+  <% props[:topics].each do |topic| %>
+    <%  props[:topic] = topic
+        props[:bookmarks] = (props[:rpt_tag] == 'my_blocmarks') \
+                                ? topic.bookmarks_by_user(current_user) \
+                                : topic.bookmarks_by_user_liked(current_user)
     %>
+    <%= render partial: 'user_profile_topic', locals: { props: props } %>
   <% end %>
 </div>

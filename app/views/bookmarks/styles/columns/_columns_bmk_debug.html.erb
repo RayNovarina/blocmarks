@@ -4,19 +4,19 @@
       <div class="media-body">
         <h5 class="media-heading css-bookmark-container" style="background: yellow; font-size: 12px;">
           <span>
-            <%= "URL: #{properties[:bookmark].url}" %>
+            <%= "URL: #{props[:bookmark].url}" %>
           </span>
           <br/>
           <span>
-            <%= "Created by #{properties[:bookmark].user.name.split(' ')[0]}" %>
-            <%= "#{time_ago_in_words(properties[:bookmark].created_at)} ago" %>
+            <%= "Created by #{props[:bookmark].user.name.split(' ')[0]}" %>
+            <%= "#{time_ago_in_words(props[:bookmark].created_at)} ago" %>
           </span>
           <span style="margin-left: 8px;">
-            <%= "First liked by #{properties[:bookmark].likes.empty? ? 'NO ONE' : properties[:bookmark].likes[0].user.name.split(' ')[0]}"
+            <%= "First liked by #{props[:bookmark].likes.empty? ? 'NO ONE' : props[:bookmark].likes[0].user.name.split(' ')[0]}"
             %>
           </span>
           <span style="margin-left: 8px;">
-            <%= "#{current_user.liked?(properties[:bookmark]) ? "" : "Not "}Liked by #{current_user.name}" %>
+            <%= "#{current_user.liked?(props[:bookmark]) ? "" : "Not "}Liked by #{current_user.name}" %>
           </span>
           <span style="margin-left: 8px;">
             <%= "#{current_user.name.split(' ')[0]}'s authorizations: " \

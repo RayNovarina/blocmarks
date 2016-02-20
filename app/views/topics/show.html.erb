@@ -1,20 +1,21 @@
 <header style="margin-bottom:30px;">
   <div class="row">
-    <%= render partial: 'show_page_header', locals: { topic: @topic } %>
+    <%= render partial: 'show_page_header',
+               locals: { props: properties(topic: @topic) }
+    %>
   </div>
 </header>
 
 <main>
   <div class="row">
     <div class="col-md-12">
+      <% props = properties( topic: @topic, num_items: @topic.bookmarks.length) %>
       <% @topic.bookmarks.each_with_index do |bookmark, index| %>
-        <%= render partial: '/bookmarks/bookmark',
-                   locals: { properties:
-                               { topic: @topic, bookmark: bookmark,
-                                 num_items: @topic.bookmarks.length,
-                                 item_num: index
-                               }
-                           } %>
+        <% props[:bookmark] = bookmark
+           props[:item_num] = index
+        %>
+        <%= render partial: '/bookmarks/bookmark', locals: { props: props }
+        %>
       <% end %>
     </div>
   </div>

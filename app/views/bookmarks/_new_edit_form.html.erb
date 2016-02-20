@@ -1,5 +1,5 @@
 <div class="css-new_edit_form">
-  <%= form_for [topic, bookmark]  do |f| %>
+  <%= form_for [props[:topic], props[:bookmark]]  do |f| %>
 
     <%= f.label :title %><br />
     <%= f.text_field :title, autofocus: true, class: 'form-control', placeholder: 'Enter bookmark title' %>
@@ -11,7 +11,7 @@
     <%= f.text_field :url, class: 'form-control', placeholder: 'Enter bookmark url or address' %>
 
     <div class="css-actions">
-      <%= f.submit(bookmark.new_record? ? 'Create Bookmark' : 'Update Bookmark', class: 'btn btn-primary') %>
+      <%= f.submit(props[:bookmark].new_record? ? 'Create Bookmark' : 'Update Bookmark', class: 'btn btn-primary') %>
     </div>
   <% end %>
 </div>

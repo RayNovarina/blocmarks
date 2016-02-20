@@ -1,0 +1,6 @@
+<% require 'pry'
+binding.pry %>
+
+<% if policy(Like).create? && Config.rpt[:bmks][rpt_tag.to_sym][:include_likes] %>
+  <%= render partial: 'likes/like', locals: { properties: properties } %>
+<% end %>

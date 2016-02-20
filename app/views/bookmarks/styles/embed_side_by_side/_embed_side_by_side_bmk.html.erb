@@ -1,23 +1,31 @@
 <% # col = 0, 1, 2  index % 3 = column position
   column =
-    properties[:item_num] % Config.rpt[:bmks][:embedly][:bookmarks_per_row]
+    properties[:item_num] % Config.rpt[:bmks][:embed_side_by_side][:bookmarks_per_row]
 %>
 <% if column == 0 %>
   <div class="row">
 <% end %>
+
+    <div class="col-md-4">
+      <div class="media">
+        <div class="media-body">
+          <%  results = get_embed_card_preview_html(properties[:bookmark].url) %>
+          <%= results[:response][:html] %>
+        </div>
+      </div>
+    </div>
+
     <div class="col-md-4">
       <div class="media">
         <div class="media-body">
           <%= render partial: 'bookmarks/styles/embed_ray/embed_ray_card',
                      locals: { properties: properties }
           %>
-          <%= render partial: 'bookmarks/styles/embed_ray/embed_ray_card_footer',
-                     locals: { properties: properties }
-          %>
         </div>
       </div>
     </div>
-<% if (column == (Config.rpt[:bmks][:embed_ray][:bookmarks_per_row] - 1)) ||
+
+<% if (column == (Config.rpt[:bmks][:embed_side_by_side][:bookmarks_per_row] - 1)) ||
                  (properties[:item_num] == (properties[:num_items] - 1))
 %>
   </div>

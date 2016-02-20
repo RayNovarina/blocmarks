@@ -1,8 +1,8 @@
 <div class="css-parent-topic-title">
-    <h3 class="media-heading text-center" title='Created by: <%= "#{topic.user.name}" %>'>
-      #<%= topic.title.downcase.capitalize %>
+    <h3 class="media-heading text-center" title='Created by: <%= "#{props[:topic].user.name}" %>'>
+      #<%= props[:topic].title.downcase.capitalize %>
     </h3>
   <div class="text-center css-header-desc">
-    <%= topic.description %>
+    <%= props[:topic].description %>
   </div>
 </div>

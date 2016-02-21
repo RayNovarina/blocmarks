@@ -1,7 +1,47 @@
-<% bookmark = @bookmark
-   results = get_embed_card_preview_html(bookmark.url)
-   request = results[:request]
-   api_response = results[:response][:api_response]
+<% #NOTE: we got here via a windy road. topics or usersController show/index
+  # action to /views/bookmarks/_bookmark.html.erb
+  #        to /views/bookmarks/styles/embed_ray/_embed_ray_card.html.erb
+  #           which launched an iframe (us) with src= the rails route of
+  #           get '/topics/:topic_id/bookmarks/:id/embed_ray_iframe', to: 'bookmarks#embed_ray_iframe', as: 'topic_bookmark_embed_ray_iframe'
+  #        to /controllers/bookmarks_controller.rb
+  #        to the bookmarks#embed_ray_iframe action
+  #           which then renders us as a partial with locals of @bookmark
+  #        to HERE! with @bookmark and params from the url set by
+  #           /views/bookmarks/styles/embed_ray/_embed_ray_card.html.erb
+  # Recover what context we can.
+  props =
+    properties(
+      { bookmark: @bookmark, topic: @bookmark.topic },
+      params.key?(:rpt_tag) ? params[:rpt_tag] : nil,
+      params.key?(:controller_action_override) ? \
+        params[:controller_action_override] : nil
+    )
+  rpt_bmk_calc_helpers(props)
+  results = get_embed_card_preview_html(props[:bookmark].url)
+  request = results[:request]
+  api_response = results[:response][:api_response]
+
+# div_class_provider_style_min_height = 19 << 'px; '
+# img_class_provider_favicon_width = 16 << 'px; '
+# img_class_provider_favicon_height = 16 << 'px; '
+# img_class_provider_favicon_src = api_response.favicon_url
+# a_class_provider_name_href = api_response.provider_url
+# a_class_provider_name = api_response.provider_name.upcase
+# div_class_art_bd_style_width = 300 << 'px; '
+# div_class_art_bd_style_max_height = 142 << 'px; '
+# div_class_art_bd_a_href = api_response.url
+# div_class_art_bd_img_style_min_height = 142 << 'px; '
+# div_class_art_bd_img_style_src = api_response.thumbnail_url
+# div_class_art_bd_class_title_a_href = api_response.url
+# div_class_art_bd_class_title = api_response.title
+# div_class_art_bd_p_class_description = api_response.description
+# div_class_art_bd_a_class_action_href = api_response.url
+# div_class_art_bd_a_class_action = api_response.type_== 'link ?
+#     'Read this on' :
+#     api_response.type == 'photo' ?
+#     'View this photo at' :
+#     'Full video at'
+#     + api_response.provider_url.split('http://')[1]
 %>
 
 <!DOCTYPE html>
@@ -19,7 +59,8 @@
   </script>
   <div class="card article">
     <div class="hdr">
-      <div class="provider provider-gt-35" style="min-height: 19px;">
+      <div class="provider provider-gt-35"
+           style="min-height: 19px;">
         <img class="provider-favicon"
              width="16"
              height="16"
@@ -37,7 +78,7 @@
 
       <div class="pair-bd">
         <div class="art-bd"
-             style="overflow: hidden; width: 300px; max-height:142px; overflow:hidden;">
+             style="overflow: hidden; width: 300px; max-height: 142px; overflow:hidden;">
           <a class=""
              style="padding-bottom: 0; background-color: rgb(255, 255, 255);"
              href="<%= "#{api_response.url}" %>"
@@ -77,6 +118,11 @@
       </div>
     </div>
   </div>
+
+  <% if rpt_bmk_part(props)[:debug_footer] %>
+    <%= render partial: 'bookmarks/styles/embed_ray/embed_ray_bmk_debug',
+               locals: { props: props.merge({api_response: api_response }) } %>
+  <% end %>
 
 </body>
 </html>

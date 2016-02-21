@@ -1,13 +1,43 @@
+<%
+  # default: 320px
+    class_embedly_card_hug_width = 320.to_s << 'px; '
+  # default: 320px
+    iframe_class_embedly_card_width = 320.to_s << 'px; '
+  # default: 366px. Plus 200 if debug_footer
+    iframe_class_embedly_card_height =
+        366.to_s << 'px; ' unless rpt_bmk_part(props)[:debug_footer]
+    iframe_class_embedly_card_height =
+        566.to_s << 'px; ' if rpt_bmk_part(props)[:debug_footer]
+
+    # default: 200px.
+    iframe_style_min_width = 200.to_s << 'px; '
+  # default: topic_bookmark_embed_ray_iframe_path?queryParams
+    iframe_src_url =
+        topic_bookmark_embed_ray_iframe_path(
+          props[:topic],
+          props[:bookmark],
+          # use url/query params to pass info to iframe HTML when loaded.
+          rpt_tag: props.key?(:rpt_tag) ? props[:rpt_tag] : nil,
+          controller_action_override: props.key?(:controller_action) ? \
+            props[:controller_action] : \
+            "#{params[:controller]}_#{params[:action]}"
+        )
+%>
 <div class="embedly-card">
   <div class="embedly-card-hug"
-       style="width: 320px; padding: 0px; position: relative; max-width: 100%; margin: 5px 0px;">
+       style="width: <%= class_embedly_card_hug_width %>
+              padding: 0px; position: relative; max-width: 100%; margin: 5px 0px;">
 
     <iframe id="emb_mha3e0"
-            src ="<%= topic_bookmark_embed_ray_iframe_path(properties[:topic], properties[:bookmark]) %>"
-            class="embedly-card" width="320" height="366" frameborder="0" scrolling="no" allowtransparency="true"
-            allowfullscreen="true"
+            src ="<%= iframe_src_url %>"
+            class="embedly-card"
+            width="<%= iframe_class_embedly_card_width %> "
+            height="<%= iframe_class_embedly_card_height %> "
+            frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen="true"
+
             style="border: medium none; position: relative; visibility: visible; display: block; margin: 0px;
-                   padding: 0px; max-width: 100%; min-width: 200px;">
+                  min-width: <%= iframe_style_min_width %>
+                  padding: 0px; max-width: 100%;">
     </iframe>
 
     <% #add class embd-active to show share links %>

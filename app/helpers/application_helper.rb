@@ -11,8 +11,9 @@ module ApplicationHelper
   #====================== Report configurations ======
   #
 
-  # Example1: <%= render partial: 'index_page_header',
-  #                      locals: { props: properties(title: 'All Blocmarks', topics: @topics) } %>
+  # Example1: <%= render
+  #    partial: 'index_page_header',
+  #    locals: { props: properties(title: 'All Blocmarks', topics: @topics) } %>
   # Becomes:  locals: { props: {
   #                       title: 'All Blocmarks', topics: @topics,
   #                       rpt: Config.rpt[:topics_index]
@@ -23,20 +24,14 @@ module ApplicationHelper
   # Example2: <%= render partial: '/bookmarks/styles/columns/columns_bmk',
   #                      locals: { props: props }
   #          %>
-  def properties(locals_hash = nil, rpt_tag = nil)
-    # require 'pry'
-    # binding.pry
-    # ret = locals_hash.merge(rpt: rpt_config(rpt_tag)) unless locals_hash.nil?
-    # ret = { rpt: rpt_config(rpt_tag) } if locals_hash.nil?
+  def properties(locals_hash = nil, rpt_tag = nil, controller_action = nil)
     if locals_hash.nil?
-      ret = { rpt_tag: rpt_tag, rpt: rpt_config(rpt_tag) }
+      ret = { rpt_tag: rpt_tag, rpt: rpt_config(rpt_tag, controller_action) }
     else
       ret = locals_hash
       ret[:rpt_tag] = rpt_tag
-      ret[:rpt] = rpt_config(rpt_tag)
+      ret[:rpt] = rpt_config(rpt_tag, controller_action)
     end
-    # require 'pry'
-    # binding.pry
     ret
   end
 
@@ -49,13 +44,11 @@ module ApplicationHelper
   #            or
   #          if rpt_config('my_blocmarks')[:topic][:include_new_bookmark]
   #
-  def rpt_config(rpt_tag = nil)
-    # require 'pry'
-    # binding.pry
-    rpt_sym = "#{params[:controller]}_#{params[:action]}".to_sym
+  def rpt_config(rpt_tag = nil, controller_action = nil)
+    rpt_sym = "#{params[:controller]}_#{params[:action]}"
+              .to_sym unless controller_action
+    rpt_sym = controller_action.to_sym if controller_action
     ret = Config.rpt[rpt_sym][:reports][rpt_tag.nil? ? rpt_sym : rpt_tag.to_sym]
-    # require 'pry'
-    # binding.pry
     ret
   end
 
@@ -87,18 +80,86 @@ module ApplicationHelper
     ret
   end
 
+  # col = 0, 1, 2  index % 3 = column position
+  #  column =
+  #    props[:item_num] % rpt_bmk(props)[:bookmarks_per_row]
+  # Calc current values for rpt_bmk(props)[:first_column?], etc.
+  # if rpt_bmk(props):[first_column?] %>
+  # if rpt_bmk(props):[last_column?] || rpt_bmk(props):[last_item?]
+  # We can't be sure which level of report properties we are called with.
+  #   props could be with locals from a loop including item_num, etc. as in:
+  #
+  #   Or just a straight call to render a single bookmark without details.
+  def rpt_bmk_calc_helpers(props)
+    rpt_bmk_calc_column_info_missing_items(props)
+
+    props[:column_pos] = props[:bookmarks_index] % props[:bookmarks_per_row]
+    props[:first_column?] = props[:column_pos] == 0
+    props[:last_column?] = props[:column_pos] == (props[:bookmarks_per_row] - 1)
+    props[:first_item?] = props[:bookmarks_index] == 0
+    props[:last_item?] = props[:bookmarks_index] == (props[:num_bookmarks] - 1)
+  end
+
+  # Add in useful fields.
+  def rpt_bmk_calc_column_info_missing_items(props)
+    # We can't be sure which level of report properties we are called with.
+    bmk_props = rpt_bmk(props)
+    rpt_bmk_calc_bookmarks_index(props, bmk_props)
+    rpt_bmk_calc_bookmarks_per_row(props, bmk_props)
+    rpt_bmk_calc_num_bookmarks(props, bmk_props)
+  end
+
+  def rpt_bmk_calc_bookmarks_index(props, _bmk_props)
+    props[:bookmarks_index] = props[:item_num] if props.key?(:item_num)
+    props[:bookmarks_index] = 0 unless props.key?(:item_num)
+  end
+
+  def rpt_bmk_calc_bookmarks_per_row(props, bmk_props)
+    props[:bookmarks_per_row] =
+      bmk_props[:bookmarks_per_row] unless props.key?(:bookmarks_per_row)
+    props[:bookmarks_per_row] =
+      1 unless props.key?(:bookmarks_per_row)
+  end
+
+  def rpt_bmk_calc_num_bookmarks(props, _bmk_props)
+    props[:num_bookmarks] = props[:num_items] if props.key?(:num_items)
+    props[:num_bookmarks] = 1 unless props.key?(:num_items)
+  end
+
+  # Just a convention method to make sure we access props data consistently.
+  # Most of the useful info has already been stored in props and is not
+  # accesible via rpt_bmk(props) method, which can be confusing.
+  # if rpt_bmk_helpers(props)[:first_column?]
+  def rpt_bmk_helpers(props)
+    props
+  end
+
+  #====================== Bookmark Partials configuration ======
+  #
+  # Example1: Assume we already have inherited properties.
+  #  Returns: (if Bookmark style is :embed_ray):
+  #           Config.rpt[:bmks][:embed_ray]
+  #  To Use: if rpt_bmk_part(props)[:debug_footer]
+  def rpt_bmk_part(props_hash = nil)
+    ret = nil if props_hash.nil?
+    ret = Config.rpt[:bmks][rpt_bmk(props_hash)[:style]] unless props_hash.nil?
+    ret
+  end
+
   #====================== Embedly ====================
   # per: https://github.com/embedly/embedly-ruby
   # per: http://stackoverflow.com/questions/28622912/using-embedly-with-rails
   #
-  BLOCMARKS_SYSTEM_ERROR    = 'Blockmarks system error'.freeze
-  PAGE_NOT_FOUND            = 'Page not found'.freeze
-  INVALID_URL               = 'Invalid url'.freeze
-  URL_NOT_AUTHORIZED        = 'Url not authorized'.freeze
+  (BLOCMARKS_SYSTEM_ERROR = 'Blockmarks system error'.freeze).freeze
+  (PAGE_NOT_FOUND          = 'Page not found'.freeze).freeze
+  (INVALID_URL             = 'Invalid url'.freeze).freeze
+  (URL_NOT_AUTHORIZED      = 'Url not authorized'.freeze).freeze
   # response.type = 'error'
-  ERROR_TITLE = { 400 => INVALID_URL, 401 => URL_NOT_AUTHORIZED,
-                   404 => PAGE_NOT_FOUND
-                }
+  ERROR_TITLE =
+    { 400 => INVALID_URL,
+      401 => URL_NOT_AUTHORIZED,
+      404 => PAGE_NOT_FOUND
+    }
   ERROR_TITLE.default = BLOCMARKS_SYSTEM_ERROR
   ERROR_TITLE.freeze
   #
@@ -119,7 +180,7 @@ module ApplicationHelper
     issue_embedly_api_request(api, func, url)
   end
 
-  EMBEDLY_API_KEY = 'ce6f3f7334e04de7a57e9cccf11abd5a'.freeze
+  (EMBEDLY_API_KEY = 'ce6f3f7334e04de7a57e9cccf11abd5a'.freeze).freeze
   def connect_to_embedly
     Embedly::API.new(key: EMBEDLY_API_KEY)
   end
@@ -136,7 +197,7 @@ module ApplicationHelper
   #      the query parameters.
   #   maxheight:	Integer
   #      This is the maximum height of the embed in pixels. Functions the same
-  #      as maxwidth, but for the height of the embed instead. It’s noteworthy
+  #      as maxwidth, but for the height of the embed instead. It's noteworthy
   #      that maxwidth is preferred over maxheight.
   #   width:	Integer
   #      Will scale embeds type rich and video to the exact width that a
@@ -206,8 +267,8 @@ module ApplicationHelper
     end
   end
 
-  PLATFORM_JS = %(<script async src=\"//cdn.embedly.com/widgets/platform.js\"
-  charset=\"UTF-8\"></script>).freeze
+  (PLATFORM_JS = %(<script async src=\"//cdn.embedly.com/widgets/platform.js\"
+  charset=\"UTF-8\"></script>).freeze).freeze
   # platform.js options? or api?
   #   in <blockquote
   #----------- type = PHOTO ----------------------------------------------------
@@ -234,14 +295,13 @@ module ApplicationHelper
   # </h4>
   # <p></p></blockquote>
   # <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+  # minimal link format.
+  # card_html = %(
+  # <a class=\"embedly-card\"
+  #   href=\"#{api_response.url}\">Card</a>
+  # ) << PLATFORM_JS
+  # card_html
   def make_photo_card_for_embedly(api_response, _request_url)
-    # minimal link format.
-    # card_html = %(
-    # <a class=\"embedly-card\"
-    #   href=\"#{api_response.url}\">Card</a>
-    # ) << PLATFORM_JS
-    # card_html
-
     card_html = %(
     <blockquote class=\"embedly-card\"
                 data-card-key=\"ce6f3f7334e04de7a57e9cccf11abd5a\"
@@ -311,7 +371,7 @@ module ApplicationHelper
     "<h2>Api.response.type = #{api_response.type}</h2>"
   end
 
-  def make_error_card_for_embedly(api_response, request_url, title)
+  def make_error_card_for_embedly(api_response, _request_url, title)
     "<h2>#{title}</h2><p>Api.response.type = #{api_response.type}</p>"
   end
 

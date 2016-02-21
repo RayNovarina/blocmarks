@@ -1,25 +1,23 @@
-<% # col = 0, 1, 2  index % 3 = column position
-  column =
-    properties[:item_num] % Config.rpt[:bmks][:embedly][:bookmarks_per_row]
-%>
-<% if column == 0 %>
+<% if rpt_bmk_helpers(props)[:first_column?] %>
   <div class="row">
 <% end %>
     <div class="col-md-4">
       <div class="media">
         <div class="media-body">
           <%= render partial: 'bookmarks/styles/embed_ray/embed_ray_card',
-                     locals: { properties: properties }
+                     locals: { props: props }
           %>
           <%= render partial: 'bookmarks/styles/embed_ray/embed_ray_card_footer',
-                     locals: { properties: properties }
+                     locals: { props: props }
           %>
+          <% # if rpt_bmk_part(props)[:debug_footer] %>
+            <% #= render partial: 'bookmarks/styles/embed_ray/embed_ray_bmk_debug', locals: { props: props } %>
+          <% #end %>
         </div>
       </div>
     </div>
-<% if (column == (Config.rpt[:bmks][:embed_ray][:bookmarks_per_row] - 1)) ||
-                 (properties[:item_num] == (properties[:num_items] - 1))
-%>
+
+<% if rpt_bmk_helpers(props)[:last_column?] || rpt_bmk_helpers(props)[:last_item?] %>
   </div>
-  <hr style="margin-top: 10px; margin-bottom: 14px; color: black; border: solid 1px;">
+  <hr style="margin-top: 10px; margin-bottom: 24px; color: black; border: solid 1px;">
 <% end %>

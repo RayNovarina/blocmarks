@@ -1,3 +1,7 @@
+<% # Calc current values for rpt_bmk(props)[:first_column?], etc.
+   # Access via rpt_bmk_helpers[:fields...]
+  rpt_bmk_calc_helpers(props)
+%>
 <% if rpt_bmk(props)[:style] == :columns %>
   <%= render partial: '/bookmarks/styles/columns/columns_bmk',
              locals: { props: props }

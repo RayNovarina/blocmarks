@@ -31,6 +31,6 @@
     </div>
   </div>
 </div>
-<% if Config.bmk_columns[:debug_footer] %>
+<% if rpt_bmk_part(props)[:debug_footer] %>
   <%= render partial: 'bookmarks/styles/columns/columns_bmk_debug', locals: { props: props } %>
 <% end %>

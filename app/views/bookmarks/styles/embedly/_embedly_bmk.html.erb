@@ -1,8 +1,4 @@
-<% # col = 0, 1, 2  index % 3 = column position
-  column =
-    props[:item_num] % rpt_bmk(props)[:bookmarks_per_row]
-%>
-<% if column == 0 %>
+<% if rpt_bmk_helpers(props)[:first_column?] %>
   <div class="row">
 <% end %>
     <div class="col-md-4">
@@ -13,9 +9,7 @@
         </div>
       </div>
     </div>
-<% if (column == (rpt_bmk(props)[:bookmarks_per_row] - 1)) ||
-                 (props[:item_num] == (props[:num_items] - 1))
-%>
+<% if rpt_bmk_helpers(props)[:last_column?] || rpt_bmk_helpers(props)[:last_item?] %>
   </div>
   <hr style="margin-top: 10px; margin-bottom: 14px; color: black; border: solid 1px;">
 <% end %>

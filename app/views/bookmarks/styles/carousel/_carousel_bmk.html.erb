@@ -1,23 +1,16 @@
-<% if properties[:item_num] == 0 %>
-  <div id="myCarousel" class="carousel slide"
+<!-- Begin: carousel for Topic -->
+<% if rpt_bmk_helpers(props)[:first_item?] %>
+  <div id="myCarousel" class="carousel slide carousel-topic-num-<%= props[:bookmarks_index] / props[:bookmarks_per_row] %>"
        data-ride="carousel" data-interval="false" data-wrap="true"
   >
 
     <!-- Begin: Item Indicators -->
     <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
-      <li data-target="#myCarousel" data-slide-to="4"></li>
-      <li data-target="#myCarousel" data-slide-to="5"></li>
-      <li data-target="#myCarousel" data-slide-to="6"></li>
-      <li data-target="#myCarousel" data-slide-to="7"></li>
-      <li data-target="#myCarousel" data-slide-to="8"></li>
-      <li data-target="#myCarousel" data-slide-to="9"></li>
-      <li data-target="#myCarousel" data-slide-to="10"></li>
-      <li data-target="#myCarousel" data-slide-to="11"></li>
-      <li data-target="#myCarousel" data-slide-to="12"></li>
+      <% props[:num_bookmarks].times do |index| %>
+        <li data-target="#myCarousel" data-slide-to="<%= index.to_s %>"
+            class="<%= index == 0 ? 'active' : '' %>">
+        </li>
+      <% end %>
     </ol>
     <!-- End: Item Indicators -->
 
@@ -25,18 +18,26 @@
     <div class="carousel-inner" role="listbox">
 <% end %>
 
-      <!-- Begin: slide item <%= properties[:item_num] %> -->
-      <div class="item<%= properties[:item_num] == 0 ? " active" : ""%>">
+    <% if rpt_bmk_helpers(props)[:first_column?] %>
+      <!-- Begin: slide item  -->
+      <div class="item<%= props[:item_num] == 0 ? " active" : ""%> slide-item-<%= props[:item_num] %>">
         <div class="col-md-12">
           <div class="span12" style="padding-left: 48px;">
-            <% results = get_embed_card_preview_html(properties[:bookmark].url) %>
-            <img src="<%= results[:response][:api_response].thumbnail_url %>">
+    <% end %>
+            <% # render full slide of embed_ray_card %>
+            <%= render partial: '/bookmarks/styles/embed_ray/embed_ray_bmk',
+                       locals: { props: props }
+            %>
+            <% # results = get_embed_card_preview_html(props[:bookmark].url) %>
+            <% #<img src="<= results[:response][:api_response].thumbnail_url"> %>
+    <% if rpt_bmk_helpers(props)[:last_column?] || rpt_bmk_helpers(props)[:last_item?] %>
           </div>
         </div>
       </div>
-      <!-- End: slide item <%= properties[:item_num] %> -->
+      <!-- End: slide item  -->
+    <% end %>
 
-<% if properties[:item_num] == (properties[:item_num] - 1) %>
+<% if rpt_bmk_helpers(props)[:last_item?] %>
     </div>
     <!-- End: Wrapper for slides -->
 

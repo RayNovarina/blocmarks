@@ -30,7 +30,9 @@ Config.rpt[:topics_index] = {
         include_edit:          false
       },
       bookmark: {
+        # columns embedly embed_ray embed_side_by_side carousel
         style:              :columns,
+        bookmarks_per_row:  3,
         include_likes:      true,
         include_delete:     true,
         include_edit:       true
@@ -49,7 +51,9 @@ Config.rpt[:topics_show] = {
         include_edit:          true
       },
       bookmark: {
-        style:              :columns,
+        # columns embedly embed_ray embed_side_by_side carousel
+        style:              :carousel,
+        bookmarks_per_row:  3,
         include_likes:      true,
         include_delete:     true,
         include_edit:       true
@@ -87,7 +91,8 @@ Config.rpt[:users_show] = {
         include_edit:          true
       },
       bookmark: {
-        style:              :columns,
+        style:              :carousel,
+        bookmarks_per_row:  3,
         include_likes:      false,
         include_delete:     true,
         include_edit:       true
@@ -101,7 +106,8 @@ Config.rpt[:users_show] = {
         include_edit:          false
       },
       bookmark: {
-        style:              :columns,
+        style:              :carousel,
+        bookmarks_per_row:  3,
         include_likes:      true,
         include_delete:     false,
         include_edit:       false
@@ -130,17 +136,11 @@ Config.rpt[:bookmarks_edit] = {
 }
 #------- Bookmarks partial
 Config.rpt[:bmks] = {
-  columns_style:            false,
-  embedly_style:            false,
-  embed_ray_style:          true,
-  embed_side_by_side_style: false,
-  carousel_style:           false
 }
 #
 #---------------
 # Bookmarks partial: columns style.
 Config.rpt[:bmks][:columns] = {
-  bookmarks_per_row:  2,
   debug_footer:       false
 }
 Config.bmk_columns = Config.rpt[:bmks][:columns]
@@ -148,7 +148,6 @@ Config.bmk_columns = Config.rpt[:bmks][:columns]
 #-------------------
 # Bookmarks partial:  embedly style.
 Config.rpt[:bmks][:embedly] = {
-  bookmarks_per_row:  3,
   debug_footer:       false
 }
 Config.bmk_embedly = Config.rpt[:bmks][:embedly]
@@ -156,7 +155,6 @@ Config.bmk_embedly = Config.rpt[:bmks][:embedly]
 #-------------------
 # Report Bookmarks embed_ray style.
 Config.rpt[:bmks][:embed_ray] = {
-  bookmarks_per_row:  3,
   debug_footer:       false
 }
 Config.bmk_embed_ray = Config.rpt[:bmks][:embed_ray]
@@ -164,7 +162,6 @@ Config.bmk_embed_ray = Config.rpt[:bmks][:embed_ray]
 #-------------------
 # Bookmarks partial:  embed_side_by_side style.
 Config.rpt[:bmks][:embed_side_by_side] = {
-  bookmarks_per_row:  1,
   debug_footer:       false
 }
 Config.bmk_embed_side_by_side = Config.rpt[:bmks][:embed_side_by_side]
@@ -172,7 +169,6 @@ Config.bmk_embed_side_by_side = Config.rpt[:bmks][:embed_side_by_side]
 #-------------------
 # Bookmarks partial:  carousel style.
 Config.rpt[:bmks][:carousel] = {
-  bookmarks_per_row:  3,
   debug_footer:       false
 }
 Config.bmk_carousel = Config.rpt[:bmks][:carousel]

@@ -1,11 +1,16 @@
 <div class="css-like-link"
      style="width: 48px; display: inline-block;">
+     <% class_mixins = props[:btn_classes] || '' %>
   <% if like = current_user.liked?(props[:bookmark]) %>
-    <%= link_to [props[:bookmark], like], class: 'btn btn-danger', method: :delete do %>
+    <%= link_to [props[:bookmark],
+                like],
+                class: 'btn btn-danger' << class_mixins,
+                method: :delete do
+    %>
       <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Unlike
     <% end %>
   <% else %>
-    <%= link_to [props[:bookmark], Like.new], class: 'btn btn-primary', method: :post do %>
+    <%= link_to [props[:bookmark], Like.new], class: 'btn btn-primary' << class_mixins, method: :post do %>
       <i class="glyphicon glyphicon-star"> </i>&nbsp; Like
     <% end %>
   <% end %>

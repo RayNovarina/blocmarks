@@ -31,7 +31,7 @@ Config.rpt[:topics_index] = {
       },
       bookmark: {
         # columns embedly embed_ray embed_side_by_side carousel
-        style:              :columns,
+        style:              :embed_ray,
         bookmarks_per_row:  3,
         include_likes:      true,
         include_delete:     true,
@@ -91,7 +91,8 @@ Config.rpt[:users_show] = {
         include_edit:          true
       },
       bookmark: {
-        style:              :carousel,
+        # columns embedly embed_ray embed_side_by_side carousel
+        style:              :embedly,
         bookmarks_per_row:  3,
         include_likes:      false,
         include_delete:     true,

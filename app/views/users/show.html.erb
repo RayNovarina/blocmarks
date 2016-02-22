@@ -1,7 +1,9 @@
+
 <%= render partial: 'user_profile_report',
            locals: { props: properties(
                               { title: 'My Blocmarks',
-                                topics: @topics_with_user_bookmarks
+                                topics: @topics_with_user_bookmarks,
+                                num_topics: @topics_with_user_bookmarks.length
                               },
                               'my_blocmarks'
                             )
@@ -11,7 +13,8 @@
 <%= render partial: 'user_profile_report',
            locals: { props: properties(
                               { title: 'Liked Blocmarks',
-                                topics: @topics_with_user_liked_bookmarks
+                                topics: @topics_with_user_liked_bookmarks,
+                                num_topics: @topics_with_user_liked_bookmarks.length
                               },
                               'my_liked_blocmarks'
                             )

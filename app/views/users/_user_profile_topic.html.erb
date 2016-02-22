@@ -23,18 +23,11 @@
     <div class="row">
       <div class="col-md-12">
         <% props[:bookmarks].each_with_index do |bookmark, index| %>
-          <%= render partial: '/bookmarks/bookmark',
-                     locals: { props: properties(
-                                        { topic: props[:topic],
-                                          num_items: props[:bookmarks].length,
-                                          bookmark: bookmark,
-                                          item_num: index
-                                        },
-                                        props[:rpt_tag]
-                                      )
-                             } %>
-          <% #empty_bookmark_columns = num_bookmarks  % bookmarks_per_row %>
-        <% end %>
+        <%= render partial: '/bookmarks/bookmark',
+                   locals: { props: props.merge!(
+                             num_bookmarks: props[:bookmarks].length,
+                             bookmark: bookmark, bookmarks_index: index) } %>
+      <% end %>
       </div>
     </div>
   </main>

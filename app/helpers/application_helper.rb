@@ -49,6 +49,7 @@ module ApplicationHelper
               .to_sym unless controller_action
     rpt_sym = controller_action.to_sym if controller_action
     ret = Config.rpt[rpt_sym][:reports][rpt_tag.nil? ? rpt_sym : rpt_tag.to_sym]
+    ret[:rpt_tag] ||= (rpt_tag || rpt_sym.to_s)
     ret
   end
 
@@ -96,8 +97,9 @@ module ApplicationHelper
     props[:column_pos] = props[:bookmarks_index] % props[:bookmarks_per_row]
     props[:first_column?] = props[:column_pos] == 0
     props[:last_column?] = props[:column_pos] == (props[:bookmarks_per_row] - 1)
-    props[:first_item?] = props[:bookmarks_index] == 0
-    props[:last_item?] = props[:bookmarks_index] == (props[:num_bookmarks] - 1)
+    props[:first_bookmark?] = props[:bookmarks_index] == 0
+    props[:last_bookmark?] =
+      props[:bookmarks_index] == (props[:num_bookmarks] - 1)
   end
 
   # Add in useful fields.
@@ -110,29 +112,53 @@ module ApplicationHelper
   end
 
   def rpt_bmk_calc_bookmarks_index(props, _bmk_props)
-    props[:bookmarks_index] = props[:item_num] if props.key?(:item_num)
-    props[:bookmarks_index] = 0 unless props.key?(:item_num)
+    props[:bookmarks_index] ||= props[:item_num]
+    props[:bookmarks_index] ||= 0
   end
 
   def rpt_bmk_calc_bookmarks_per_row(props, bmk_props)
-    props[:bookmarks_per_row] =
-      bmk_props[:bookmarks_per_row] unless props.key?(:bookmarks_per_row)
-    props[:bookmarks_per_row] =
-      1 unless props.key?(:bookmarks_per_row)
+    props[:bookmarks_per_row] ||= bmk_props[:bookmarks_per_row]
+    props[:bookmarks_per_row] ||= 1
   end
 
   def rpt_bmk_calc_num_bookmarks(props, _bmk_props)
-    props[:num_bookmarks] = props[:num_items] if props.key?(:num_items)
-    props[:num_bookmarks] = 1 unless props.key?(:num_items)
+    props[:num_bookmarks] ||= props[:num_items]
+    props[:num_bookmarks] ||= 1
   end
 
   # Just a convention method to make sure we access props data consistently.
   # Most of the useful info has already been stored in props and is not
   # accesible via rpt_bmk(props) method, which can be confusing.
   # if rpt_bmk_helpers(props)[:first_column?]
+  # we need separate reports, topics, bookmarks helpers, return dif structures:
+  # merge helpers fields with report.bookmarks fields and partials.sytle fields?
+  # def rpt_bmk_helpers(props)
+  #   props[:bookmarks_helpers]
+  # end
+  # if rpt_bmk(props)[:include_likes]
   def rpt_bmk_helpers(props)
     props
   end
+
+  # we need separate reports, topics, bookmarks helpers, return dif structures:
+  # merge helpers fields with report.bookmarks fields and partials.sytle fields?
+  # if rpt_bmk(props)[:include_likes?]
+  # if rpt_bmk(props)[:first_column?]
+  # if rpt_bmk(props)[:debug_footer?]
+  def rpt_bmk_x(props)
+    Config.rpt[:bmks][props[:rpt][:bookmark][:style]]
+      .merge!(props[:rpt][:bookmark])
+      .merge!(props[:bookmarks_helpers])
+  end
+
+  # if rpt(props)[:include_likes?]
+  # if rpt(props)[:first_column?]
+  # if rpt(props)[:debug_footer?]
+  # def rpt(props)
+  #  rpt_config_x(props)
+  #    .merge!(rpt_topic_x)
+  #    .merge!(rpt_bmk_x)
+  # end
 
   #====================== Bookmark Partials configuration ======
   #
@@ -150,17 +176,22 @@ module ApplicationHelper
   # per: https://github.com/embedly/embedly-ruby
   # per: http://stackoverflow.com/questions/28622912/using-embedly-with-rails
   #
-  (BLOCMARKS_SYSTEM_ERROR = 'Blockmarks system error'.freeze).freeze
-  (PAGE_NOT_FOUND          = 'Page not found'.freeze).freeze
-  (INVALID_URL             = 'Invalid url'.freeze).freeze
-  (URL_NOT_AUTHORIZED      = 'Url not authorized'.freeze).freeze
+
+  BLOCMARKS_SYSTEM_ERROR = 'Blockmarks system error'.freeze
+  BLOCMARKS_SYSTEM_ERROR.freeze
+  PAGE_NOT_FOUND = 'Page not found'.freeze
+  PAGE_NOT_FOUND.freeze
+  INVALID_URL = 'Invalid url'.freeze
+  INVALID_URL.freeze
+  URL_NOT_AUTHORIZED = 'Url not authorized'.freeze
+  URL_NOT_AUTHORIZED.freeze
   # response.type = 'error'
-  ERROR_TITLE =
+  ERROR_TITLE = Hash.new(BLOCMARKS_SYSTEM_ERROR)
+  ERROR_TITLE.merge!(
     { 400 => INVALID_URL,
       401 => URL_NOT_AUTHORIZED,
       404 => PAGE_NOT_FOUND
-    }
-  ERROR_TITLE.default = BLOCMARKS_SYSTEM_ERROR
+    }.freeze)
   ERROR_TITLE.freeze
   #
   # Inputs: url
@@ -180,7 +211,8 @@ module ApplicationHelper
     issue_embedly_api_request(api, func, url)
   end
 
-  (EMBEDLY_API_KEY = 'ce6f3f7334e04de7a57e9cccf11abd5a'.freeze).freeze
+  EMBEDLY_API_KEY = 'ce6f3f7334e04de7a57e9cccf11abd5a'.freeze
+  EMBEDLY_API_KEY.freeze
   def connect_to_embedly
     Embedly::API.new(key: EMBEDLY_API_KEY)
   end
@@ -267,8 +299,9 @@ module ApplicationHelper
     end
   end
 
-  (PLATFORM_JS = %(<script async src=\"//cdn.embedly.com/widgets/platform.js\"
-  charset=\"UTF-8\"></script>).freeze).freeze
+  PLATFORM_JS = %(<script async src=\"//cdn.embedly.com/widgets/platform.js\"
+  charset=\"UTF-8\"></script>).freeze
+  PLATFORM_JS.freeze
   # platform.js options? or api?
   #   in <blockquote
   #----------- type = PHOTO ----------------------------------------------------

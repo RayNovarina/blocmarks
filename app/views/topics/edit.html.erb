@@ -1,1 +1,4 @@
-<%= render partial: 'new_edit_page', locals: { props: properties(topic: @topic) } %>
+<%= render partial: 'new_edit_page',
+           locals: { props: properties(
+                     topics: [@topic], num_topics: 1,
+                     topic: @topic, topics_index: 0) } %>

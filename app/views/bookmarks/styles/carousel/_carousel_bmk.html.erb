@@ -1,56 +1,81 @@
-<!-- Begin: carousel for Topic -->
-<% if rpt_bmk_helpers(props)[:first_item?] %>
-  <div id="myCarousel" class="carousel slide carousel-topic-num-<%= props[:bookmarks_index] / props[:bookmarks_per_row] %>"
+<% if rpt_bmk_helpers(props)[:first_bookmark?] %>
+<%= render partial: '/bookmarks/styles/carousel/carousel_styling', locals: { props: props } %>
+  <!-- Begin: carousel for Topic bookmarks -->
+  <div id="<%= "bsCarousel-#{props[:topics_index]}" %>"
+       class="carousel slide
+        <%= " bsCarousel-for-topic-#{props[:topics_index]}" %>
+        <%= " bsCarousel-num_bookmarks-#{props[:num_bookmarks]}" %>
+        <%= " bsCarousel-bookmarks-per-slide-#{props[:bookmarks_per_row]}" %>
+        <%= " bsCarousel-num-slides-#{props[:num_slides]}" %>
+       "
+       style="width: <%= props[:carousel_style_width] %> height: <%= props[:carousel_style_height] %>"
        data-ride="carousel" data-interval="false" data-wrap="true"
   >
 
-    <!-- Begin: Item Indicators -->
-    <ol class="carousel-indicators">
-      <% props[:num_bookmarks].times do |index| %>
-        <li data-target="#myCarousel" data-slide-to="<%= index.to_s %>"
+    <!-- Begin: Carousel Slides Indicators -->
+    <ol class="carousel-indicators"
+        style="margin-bottom: <%= props[:carousel_indicators_style_margin_bottom] %>"
+    >
+      <% props[:num_slides].times do |index| %>
+        <li data-target="<%= "#bsCarousel-#{props[:topics_index]}" %>" data-slide-to="<%= index.to_s %>"
             class="<%= index == 0 ? 'active' : '' %>">
         </li>
       <% end %>
     </ol>
-    <!-- End: Item Indicators -->
+    <!-- End: Carousel Slides Indicators -->
 
-    <!-- Begin: Wrapper for slides -->
+    <!-- Begin: Wrapper for Array of slides -->
     <div class="carousel-inner" role="listbox">
 <% end %>
 
     <% if rpt_bmk_helpers(props)[:first_column?] %>
-      <!-- Begin: slide item  -->
-      <div class="item<%= props[:item_num] == 0 ? " active" : ""%> slide-item-<%= props[:item_num] %>">
+      <!-- Begin: slide item (multiple bookmarks per slide) -->
+      <div class="item
+                 <%= props[:bookmarks_index] == 0 ? " active" : ""%>
+                 <%= " slide-bookmarks-index-#{props[:bookmarks_index]}" %>
+                 <%= " slide-for-num-bookmarks-#{props[:bookmarks_per_row]}" %>
+                 <%= " slide-column-pos-#{props[:column_pos]}" %>
+           ">
         <div class="col-md-12">
-          <div class="span12" style="padding-left: 48px;">
+          <div class="span12" style="padding-left: 28px;">
     <% end %>
-            <% # render full slide of embed_ray_card %>
+            <% #= " slide-column-pos-#{props[:column_pos]}" %>
+            <!-- BEGIN: render embed_ray_card of bookmark -->
             <%= render partial: '/bookmarks/styles/embed_ray/embed_ray_bmk',
                        locals: { props: props }
             %>
-            <% # results = get_embed_card_preview_html(props[:bookmark].url) %>
-            <% #<img src="<= results[:response][:api_response].thumbnail_url"> %>
-    <% if rpt_bmk_helpers(props)[:last_column?] || rpt_bmk_helpers(props)[:last_item?] %>
+            <!-- END: render embed_ray_card of bookmark -->
+    <% if rpt_bmk_helpers(props)[:last_column?] || rpt_bmk_helpers(props)[:last_bookmark?] %>
           </div>
         </div>
       </div>
       <!-- End: slide item  -->
     <% end %>
 
-<% if rpt_bmk_helpers(props)[:last_item?] %>
+<% if rpt_bmk_helpers(props)[:last_bookmark?] %>
     </div>
     <!-- End: Wrapper for slides -->
 
-        <!-- Begin: Left and right controls -->
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-        <!-- End: Left and right controls -->
+    <!-- Begin: Left and right controls -->
+    <a class="left carousel-control"
+       href="<%= "#bsCarousel-#{props[:topics_index]}" %>"
+       role="button" data-slide="prev">
+         <span class="glyphicon glyphicon-chevron-left"
+               style="font-size: <%= props[:glyphicon_chevron_style_font_size] %>
+                      margin-left: <%= props[:glyphicon_chevron_style_margin_left] %>"
+               aria-hidden="true"></span>
+         <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control"
+       href="<%= "#bsCarousel-#{props[:topics_index]}" %>"
+       role="button" data-slide="next">
+         <span class="glyphicon glyphicon-chevron-right"
+               style="font-size: <%= props[:glyphicon_chevron_style_font_size] %>
+                      margin-right: <%= props[:glyphicon_chevron_style_margin_left] %>"
+               aria-hidden="true"></span>
+         <span class="sr-only">Next</span>
+    </a>
+    <!-- End: Left and right controls -->
 
   </div>
 <% end %>

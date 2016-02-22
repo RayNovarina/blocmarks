@@ -1,7 +1,8 @@
+<% props = properties(topics: [@topic], num_topics: 1, topic: @topic, topics_index: 0) %>
+
 <header style="margin-bottom:30px;">
   <div class="row">
-    <%= render partial: 'show_page_header',
-               locals: { props: properties(topic: @topic) }
+    <%= render partial: 'show_page_header',locals: { props: props }
     %>
   </div>
 </header>
@@ -9,13 +10,11 @@
 <main>
   <div class="row">
     <div class="col-md-12">
-      <% props = properties( topic: @topic, num_items: @topic.bookmarks.length) %>
-      <% @topic.bookmarks.each_with_index do |bookmark, index| %>
-        <% props[:bookmark] = bookmark
-           props[:item_num] = index
-        %>
-        <%= render partial: '/bookmarks/bookmark', locals: { props: props }
-        %>
+      <% props[:topic].bookmarks.each_with_index do |bookmark, index| %>
+        <%= render partial: '/bookmarks/bookmark',
+                   locals: { props: props.merge!(
+                             num_bookmarks: props[:topic].bookmarks.length,
+                             bookmark: bookmark, bookmarks_index: index) } %>
       <% end %>
     </div>
   </div>

@@ -1,21 +1,28 @@
 <% #require 'pry'
 #binding.pry %>
+<% # in controller:
+   # rpt_topics_create_helpers(props = properties(title: 'All Blocmarks', topics: @topics))
+   # or # will create default report props from implied controller_action,
+   #    # rpt_topic_helplers from supplied @topics using the new instance of
+   #    # report props.
+   # props = rpt_create_helpers(topics: @topics)
+%>
+
+<% props = properties(title: 'All Blocmarks', topics: @topics, num_topics: @topics.length) %>
 
 <header style="margin-bottom:30px;">
   <div class="row">
-    <%= render partial: 'index_page_header',
-               locals: { props: properties(title: 'All Blocmarks', topics: @topics) } %>
+    <%= render partial: 'index_page_header', locals: { props: props } %>
   </div>
 </header>
 
 <main>
   <div class="row">
     <div class="col-md-12">
-      <% props = properties(topics: @topics) %>
-      <% @topics.each do |topic| %>
-        <% props[:topic] = topic %>
-        <%= render partial: 'topic', locals: { props: props }
-      %>
+      <% props[:topics].each_with_index do |topic, index| %>
+        <%= render partial: 'topic',
+                   locals: { props: props.merge!(
+                             topic: topic, topics_index: index) } %>
       <% end %>
     </div>
   </div>

@@ -1,0 +1,47 @@
+<% props[:num_slides] = (props[:num_bookmarks] + props[:bookmarks_per_row] - 1)  / props[:bookmarks_per_row] %>
+
+<% # Styling carousel container.
+   # carousel_width/height: large = 1140x435, Medium = 250, Small = 150
+   # No style: div.row and col-md-12 and
+   #           <div id="bsCarousel class=carousel"
+   #             width:  1140px;
+   #             height: 435px;
+   #    Fits three bookmarks per slide.
+   # Size: Large.
+   # 3 bookmarks per slide.
+   # div_bs_carousel_style_width  = 1140px;
+   # div_bs_carousel_style_height = 435px;
+   # ol_class_carousel_indicators_style_margin_bottom = 40px;
+
+   # a_class_left_carousel_control_style_width = 15%; (4% looks ok for large)
+   # same for a_class_right_carousel_control
+   # default: 30px;
+   #    span_class_glyphicon_chevron_left_style_font_size = 30px;
+   # default: -10px;
+   #    span_class_glyphicon_chevron_left_style_margin_left = -80px;
+   #    same for right chevron
+
+  case props[:bookmarks_per_row]
+  when 3
+    # LARGE
+    props[:carousel_style_width]  = 1140.to_s << 'px; '
+    props[:carousel_style_height] = 435.to_s << 'px; '
+    props[:carousel_indicators_style_margin_bottom] = 40.to_s << 'px; '
+    props[:glyphicon_chevron_style_font_size] = 30.to_s << 'px; '
+    props[:glyphicon_chevron_style_margin_left] = -80.to_s << 'px; '
+  when 4
+    # MEDIUM
+  when 6
+    # SMALL
+  end
+
+
+
+
+
+
+
+
+
+
+%>

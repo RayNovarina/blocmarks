@@ -1,0 +1,46 @@
+<%
+# div_class_provider_style_min_height = 19 << 'px; '
+# img_class_provider_favicon_width = 16 << 'px; '
+# img_class_provider_favicon_height = 16 << 'px; '
+# img_class_provider_favicon_src = api_response.favicon_url
+# a_class_provider_name_href = api_response.provider_url
+# a_class_provider_name = api_response.provider_name.upcase
+# div_class_art_bd_style_width = 300 << 'px; '
+# div_class_art_bd_style_max_height = 142 << 'px; '
+# div_class_art_bd_a_href = api_response.url
+# div_class_art_bd_img_style_min_height = 142 << 'px; '
+# div_class_art_bd_img_style_src = api_response.thumbnail_url
+# div_class_art_bd_class_title_a_href = api_response.url
+# div_class_art_bd_class_title = api_response.title
+# div_class_art_bd_p_class_description = api_response.description
+# div_class_art_bd_a_class_action_href = api_response.url
+# div_class_art_bd_a_class_action = api_response.type_== 'link ?
+#     'Read this on' :
+#     api_response.type == 'photo' ?
+#     'View this photo at' :
+#     'Full video at'
+#     + api_response.provider_url.split('http://')[1]
+
+  case props[:bookmarks_per_row]
+  when 3
+    # LARGE
+    # note if greater than 320px, the social links on right edge get clipped.
+    props[:class_embedly_card_hug_width] = 320.to_s << 'px; '
+    props[:iframe_class_embedly_card_width] = 320.to_s << 'px; '
+    props[:iframe_class_embedly_card_height] =
+        366.to_s << 'px; ' unless rpt_bmk_part(props)[:debug_footer]
+    props[:iframe_class_embedly_card_height] =
+        566.to_s << 'px; ' if rpt_bmk_part(props)[:debug_footer]
+    props[:iframe_style_min_width] = 200.to_s << 'px; '
+  when 4
+    # MEDIUM
+  when 6
+    # SMALL
+  end
+
+
+
+
+
+
+%>

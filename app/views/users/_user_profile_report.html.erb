@@ -5,12 +5,16 @@
     </div>
   </header>
 
-  <% props[:topics].each do |topic| %>
-    <%  props[:topic] = topic
-        props[:bookmarks] = (props[:rpt_tag] == 'my_blocmarks') \
-                                ? topic.bookmarks_by_user(current_user) \
-                                : topic.bookmarks_by_user_liked(current_user)
-    %>
-    <%= render partial: 'user_profile_topic', locals: { props: props } %>
+  <% props[:topics].each_with_index do |topic, index| %>
+    <%= render partial: 'user_profile_topic',
+               locals: { props: props.merge!(
+                           topic: topic, topics_index: index,
+                           bookmarks: (props[:rpt_tag] == 'my_blocmarks') \
+                              ? topic.bookmarks_by_user(current_user) \
+                              : topic.bookmarks_by_user_liked(current_user)
+                          )
+                        } %>
   <% end %>
+
+
 </div>

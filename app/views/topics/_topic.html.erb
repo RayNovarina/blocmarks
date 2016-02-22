@@ -1,6 +1,3 @@
-<% #require 'pry'
-#binding.pry %>
-
 <div class="css-topic" style="margin-bottom:20px;">
   <div class="row" class="css-topic-description-row" style="margin-bottom: 4px;">
     <div class="col-md-8">
@@ -27,16 +24,11 @@
 
   <div class="row">
     <div class="col-md-12">
-      <%
-
-      %>
-      <% props[:num_items] = props[:topic].bookmarks.length %>
       <% props[:topic].bookmarks.each_with_index do |bookmark, index| %>
-        <% props[:bookmark] = bookmark
-           props[:item_num] = index
-        %>
-        <%= render partial: '/bookmarks/bookmark', locals: { props: props }
-      %>
+        <%= render partial: '/bookmarks/bookmark',
+                   locals: { props: props.merge!(
+                             num_bookmarks: props[:topic].bookmarks.length,
+                             bookmark: bookmark, bookmarks_index: index) } %>
       <% end %>
     </div>
   </div>

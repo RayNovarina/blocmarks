@@ -1,4 +1,5 @@
 <% if rpt_bmk_helpers(props)[:first_column?] %>
+  <!-- BEGIN: embed_ray_bmk row -->
   <div class="row">
 <% end %>
     <div class="col-md-4">
@@ -10,14 +11,12 @@
           <%= render partial: 'bookmarks/styles/embed_ray/embed_ray_card_footer',
                      locals: { props: props }
           %>
-          <% # if rpt_bmk_part(props)[:debug_footer] %>
-            <% #= render partial: 'bookmarks/styles/embed_ray/embed_ray_bmk_debug', locals: { props: props } %>
-          <% #end %>
         </div>
       </div>
     </div>
 
-<% if rpt_bmk_helpers(props)[:last_column?] || rpt_bmk_helpers(props)[:last_item?] %>
+<% if rpt_bmk_helpers(props)[:last_column?] || rpt_bmk_helpers(props)[:last_bookmark?] %>
   </div>
+  <!-- END: embed_ray_bmk row -->
   <hr style="margin-top: 10px; margin-bottom: 24px; color: black; border: solid 1px;">
 <% end %>

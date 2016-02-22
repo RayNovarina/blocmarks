@@ -106,9 +106,17 @@ module ApplicationHelper
   def rpt_bmk_calc_column_info_missing_items(props)
     # We can't be sure which level of report properties we are called with.
     bmk_props = rpt_bmk(props)
+    rpt_bmk_calc_scope(props, bmk_props)
     rpt_bmk_calc_bookmarks_index(props, bmk_props)
     rpt_bmk_calc_bookmarks_per_row(props, bmk_props)
     rpt_bmk_calc_num_bookmarks(props, bmk_props)
+  end
+
+  def rpt_bmk_calc_scope(props, bmk_props)
+    props[:scope_bookmark] =
+      (props[:bookmark].object_id if props.key?(:bookmark)) ||
+      (bmk_props[:bookmark].object_id if bmk_props.key?(:bookmark))
+    props[:scope_bookmark] ||= ''
   end
 
   def rpt_bmk_calc_bookmarks_index(props, _bmk_props)

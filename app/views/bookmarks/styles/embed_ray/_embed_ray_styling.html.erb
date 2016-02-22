@@ -21,9 +21,12 @@
 #     'Full video at'
 #     + api_response.provider_url.split('http://')[1]
 
+
   case props[:bookmarks_per_row]
   when 3
     # LARGE
+    # Note: div_bs_carousel_style_width  = 1140px;
+    #       div_bs_carousel_style_height = 435px;
     # note if greater than 320px, the social links on right edge get clipped.
     props[:class_embedly_card_hug_width] = 320.to_s << 'px; '
     props[:iframe_class_embedly_card_width] = 320.to_s << 'px; '
@@ -32,10 +35,14 @@
     props[:iframe_class_embedly_card_height] =
         566.to_s << 'px; ' if rpt_bmk_part(props)[:debug_footer]
     props[:iframe_style_min_width] = 200.to_s << 'px; '
+    # .embdscl0 right default is -58px for Large layout. probably needs to
+    # be set differently per column and layout size.
+    props[:class_embdscl0_style_right] = -12.to_s << 'px; '
   when 4
     # MEDIUM
   when 6
     # SMALL
+    props[:class_embedly_card_hug_width] = 150.to_s << 'px; '
   end
 
 

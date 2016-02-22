@@ -1,8 +1,8 @@
 <% if rpt_bmk_helpers(props)[:first_column?] %>
   <!-- BEGIN: embed_ray_bmk row -->
-  <div class="row">
+  <div class="row css-bookmark css-bookmark-<%= props[:scope_bookmark] %>">
 <% end %>
-    <div class="col-md-4">
+    <div class="col-md-4 css-embed-card-<%= props[:scope_bookmark] %>">
       <div class="media">
         <div class="media-body">
           <%= render partial: 'bookmarks/styles/embed_ray/embed_ray_card',

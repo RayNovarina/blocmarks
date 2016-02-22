@@ -11,8 +11,13 @@
           "#{params[:controller]}_#{params[:action]}"
       )
 %>
+<div class="embedly-card">
 
-    <iframe id="emb_mha3e0"
+  <div class="embedly-card-hug"
+       style="width: <%= props[:class_embedly_card_hug_width] %>
+              padding: 0px; position: relative; max-width: 100%; margin: 5px 0px;">
+
+    <iframe id="embed_card_iframe_<%= props[:scope_bookmark] %>"
             src ="<%= iframe_src_url %>"
             class="embedly-card"
             width="<%= props[:iframe_class_embedly_card_width] %> "
@@ -24,27 +29,41 @@
                   padding: 0px; max-width: 100%;">
     </iframe>
 
-    <% #add class embd-active to show share links %>
-    <div id="<%= "embdscl0-#{props[:bookmarks_index]}" %> "
-         class="embdscl0 embd-active">
-      <a class="embd-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2Fusers%2F2%23e.mha3e0.ut4epo">
-        <i></i>
-      </a>
-      <a class="embd-twitter" href="https://twitter.com/intent/tweet?text=Active%20Record%20Associations%20-%20Ruby%20on%20Rails%20Guides&url=http%3A%2F%2Flocalhost%3A3000%2Fusers%2F2%23e.mha3e0.ut4epo&via=embedly">
-        <i></i>
-      </a>
-      <a class="embd-pinterest" href="https://www.pinterest.com/pin/create/button/?description=Active%20Record%20Associations%20-%20Ruby%20on%20Rails%20Guides&media=http%3A%2F%2Fguides.rubyonrails.org%2Fimages%2Fhas_many_through.png&url=http%3A%2F%2Flocalhost%3A3000%2Fusers%2F2%23e.mha3e0.ut4epo">
-        <i></i>
-      </a>
-      <a class="embd-card">
-        <i></i>
-      </a>
-      <a class="embd-embedly" href="http://embed.ly/cards?utm_campaign=cards&utm_medium=referral&utm_source=null" target="_blank">
-        <i></i>
-      </a>
-    </div>
-
   </div>
+
+      <% # .embdscl0 right default is -58px for Large layout. probably needs to
+         # be set differently per column and layout size.
+      %>
+      <div class="embdscl0"
+           style="right: <%= "#{props[:class_embdscl0_style_right]}" %>">
+        <a class="embd-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2Fusers%2F2%23e.mha3e0.ut4epo">
+          <i></i>
+        </a>
+        <a class="embd-twitter" href="https://twitter.com/intent/tweet?text=Active%20Record%20Associations%20-%20Ruby%20on%20Rails%20Guides&url=http%3A%2F%2Flocalhost%3A3000%2Fusers%2F2%23e.mha3e0.ut4epo&via=embedly">
+          <i></i>
+        </a>
+        <a class="embd-pinterest" href="https://www.pinterest.com/pin/create/button/?description=Active%20Record%20Associations%20-%20Ruby%20on%20Rails%20Guides&media=http%3A%2F%2Fguides.rubyonrails.org%2Fimages%2Fhas_many_through.png&url=http%3A%2F%2Flocalhost%3A3000%2Fusers%2F2%23e.mha3e0.ut4epo">
+          <i></i>
+        </a>
+        <a class="embd-card">
+          <i></i>
+        </a>
+        <a class="embd-embedly" href="http://embed.ly/cards?utm_campaign=cards&utm_medium=referral&utm_source=null" target="_blank">
+          <i></i>
+        </a>
+      </div>
+      <script>
+      /* hide/show share icons */
+      $('.css-embed-card-<%= props[:scope_bookmark] %>').find('.embedly-card-hug').hover(
+        function(){
+          icon_container = $('.css-embed-card-<%= props[:scope_bookmark] %>').find('.embdscl0')
+          //alert ('icon_container.css(\'left\') = ' + icon_container.css('left'));
+          //icon_container.css('left', '240');
+          icon_container.toggleClass('embd-active');
+        }
+      );
+      </script>
+
 </div>
 <% #Note: this embedly js script will add the embedly css to our header via creating a <link css tag.>
    # So i just added it to layouts/application.html.erb

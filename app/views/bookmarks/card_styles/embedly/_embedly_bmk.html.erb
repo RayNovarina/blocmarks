@@ -6,10 +6,12 @@
         <div class="media-body">
           <% results = get_embed_card_preview_html(props[:bookmark].url) %>
           <%= results[:response][:html] %>
+          <%= render partial: 'bookmarks/card_styles/embed_ray/embed_ray_card_footer',
+                     locals: { props: props }
+          %>
         </div>
       </div>
     </div>
 <% if rpt_bmk_helpers(props)[:last_column?] || rpt_bmk_helpers(props)[:last_item?] %>
   </div>
-  <hr style="margin-top: 10px; margin-bottom: 14px; color: black; border: solid 1px;">
 <% end %>

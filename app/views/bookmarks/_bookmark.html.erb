@@ -2,24 +2,12 @@
    # Access via rpt_bmk_helpers[:fields...]
   rpt_bmk_calc_helpers(props)
 %>
-  <% if rpt_bmk(props)[:style] == :columns %>
-    <%= render partial: '/bookmarks/styles/columns/columns_bmk',
+  <% if rpt_bmk(props)[:container] == :rows %>
+    <%= render partial: '/bookmarks/container_styles/rows/rows_container',
                locals: { props: props }
     %>
-  <% elsif rpt_bmk(props)[:style] == :embedly %>
-    <%= render partial: '/bookmarks/styles/embedly/embedly_bmk',
-               locals: { props: props }
-    %>
-  <% elsif rpt_bmk(props)[:style] == :embed_ray %>
-    <%= render partial: '/bookmarks/styles/embed_ray/embed_ray_bmk',
-               locals: { props: props }
-    %>
-  <% elsif rpt_bmk(props)[:style] == :embed_side_by_side %>
-    <%= render partial: '/bookmarks/styles/embed_side_by_side/embed_side_by_side_bmk',
-               locals: { props: props }
-    %>
-  <% elsif rpt_bmk(props)[:style] == :carousel %>
-    <%= render partial: '/bookmarks/styles/carousel/carousel_bmk',
+  <% elsif rpt_bmk(props)[:container] == :carousel %>
+    <%= render partial: '/bookmarks/container_styles/carousel/carousel_container',
                locals: { props: props }
     %>
   <% end %>

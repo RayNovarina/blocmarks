@@ -1,4 +1,4 @@
-<div class="css-topic" 
+<div class="css-topic"
      style="margin-bottom:20px;">
   <div class="row css-topic-description-row" style="margin-bottom: 4px;">
     <div class="col-md-8">
@@ -8,16 +8,24 @@
             <span style="text-decoration: underline; font-size: 24px;">
               <%= link_to "##{props[:topic].title}", props[:topic], title: "Created by: #{props[:topic].user.name}" %>
             </span>
-            <span><%= props[:topic].description %></span>
+            <span style="margin-left: 10px;"><%= props[:topic].description %></span>
           </h4>
         </div>
       </div>
     </div>
-    <div class="col-md-2">
-    </div>
-    <div class="col-md-2">
+    <div class="col-md-4">
       <% if policy(Bookmark).create? && rpt_topic(props)[:include_new_bookmark] %>
-        <%= link_to 'New Bookmark', new_topic_bookmark_path(props[:topic]), class: 'btn btn-xs btn-primary pull-right' %>
+        <span>
+          <%= link_to 'New Bookmark', new_topic_bookmark_path(props[:topic]),
+              class: 'btn btn-xs btn-primary pull-right' %>
+        </span>
+      <% end %>
+      <% if policy(props[:topic]).destroy? && rpt_topic(props)[:include_delete] %>
+        <span style="padding-left: 180px;">
+          <%= link_to 'Delete Topic', props[:topic], method: :delete,
+              class: 'btn btn-xs btn-danger',
+              data: {confirm: 'Are you sure you want to delete this topic?'} %>
+        </span>
       <% end %>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <% if rpt_bmk_helpers(props)[:first_bookmark?] %>
-<%= render partial: '/bookmarks/styles/carousel/carousel_styling', locals: { props: props } %>
+<%= render partial: '/bookmarks/container_styles/carousel/carousel_styling', locals: { props: props } %>
   <!-- Begin: carousel for Topic bookmarks -->
   <div id="<%= "bsCarousel-#{props[:topics_index]}" %>"
        class="carousel slide
@@ -41,7 +41,7 @@
     <% end %>
             <% #= " slide-column-pos-#{props[:column_pos]}" %>
             <!-- BEGIN: render embed_ray_card of bookmark -->
-            <%= render partial: '/bookmarks/styles/embed_ray/embed_ray_bmk',
+            <%= render partial: '/bookmarks/container_styles/card_styles',
                        locals: { props: props }
             %>
             <!-- END: render embed_ray_card of bookmark -->

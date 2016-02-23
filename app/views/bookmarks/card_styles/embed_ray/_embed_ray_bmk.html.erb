@@ -5,10 +5,10 @@
     <div class="col-md-4 css-embed-card-<%= props[:scope_bookmark] %>">
       <div class="media">
         <div class="media-body">
-          <%= render partial: 'bookmarks/styles/embed_ray/embed_ray_card',
+          <%= render partial: 'bookmarks/card_styles/embed_ray/embed_ray_card',
                      locals: { props: props }
           %>
-          <%= render partial: 'bookmarks/styles/embed_ray/embed_ray_card_footer',
+          <%= render partial: 'bookmarks/card_styles/embed_ray/embed_ray_card_footer',
                      locals: { props: props }
           %>
         </div>
@@ -18,5 +18,4 @@
 <% if rpt_bmk_helpers(props)[:last_column?] || rpt_bmk_helpers(props)[:last_bookmark?] %>
   </div>
   <!-- END: embed_ray_bmk row -->
-  <hr style="margin-top: 10px; margin-bottom: 24px; color: black; border: solid 1px;">
 <% end %>

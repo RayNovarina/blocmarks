@@ -72,7 +72,7 @@ class BookmarksController < ApplicationController
 
   def embed_ray_iframe
     @bookmark = Bookmark.find(params[:id])
-    render partial: '/bookmarks/styles/embed_ray/embed_ray_iframe'
+    render partial: '/bookmarks/card_styles/embed_ray/embed_ray_iframe'
   end
 
   private

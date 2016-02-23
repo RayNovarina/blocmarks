@@ -22,6 +22,11 @@
 * /assets/stylesheets/<controllerName>.scss, i.e. topics.scss
 */
 
+/* Bootstrap overrides: */
+.jumbotron {
+  background-color: #f8f8f8; /* a lighter grey so our Carousel shows well. */
+}
+
 /* We generate <a> without href to stop browser from refreshing page. But need
    a mouse pointer for consistency. */
  .css-content_for_page_header {

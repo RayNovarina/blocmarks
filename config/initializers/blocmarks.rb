@@ -26,12 +26,14 @@ Config.rpt[:topics_index] = {
       topic: {
         include_new_topic:     true,
         include_new_bookmark:  true,
-        include_delete:        false,
+        include_delete:        true,
         include_edit:          false
       },
       bookmark: {
-        # columns embedly embed_ray embed_side_by_side carousel
-        style:              :embed_ray,
+        # rows, carousel
+        container:          :carousel,
+        # columns embedly embed_ray embed_side_by_side
+        style:              :embedly,
         bookmarks_per_row:  3,
         include_likes:      true,
         include_delete:     true,
@@ -51,8 +53,10 @@ Config.rpt[:topics_show] = {
         include_edit:          true
       },
       bookmark: {
-        # columns embedly embed_ray embed_side_by_side carousel
-        style:              :carousel,
+        # rows, carousel
+        container:          :carousel,
+        # columns embedly embed_ray embed_side_by_side
+        style:              :embedly,
         bookmarks_per_row:  3,
         include_likes:      true,
         include_delete:     true,
@@ -91,7 +95,9 @@ Config.rpt[:users_show] = {
         include_edit:          true
       },
       bookmark: {
-        # columns embedly embed_ray embed_side_by_side carousel
+        # rows, carousel
+        container:          :carousel,
+        # columns embedly embed_ray embed_side_by_side
         style:              :embedly,
         bookmarks_per_row:  3,
         include_likes:      false,
@@ -107,8 +113,10 @@ Config.rpt[:users_show] = {
         include_edit:          false
       },
       bookmark: {
-        style:              :carousel,
-        bookmarks_per_row:  3,
+        # rows, carousel
+        container:          :carousel,
+        # columns embedly embed_ray embed_side_by_side
+        style:              :embedly,
         include_likes:      true,
         include_delete:     false,
         include_edit:       false
@@ -168,8 +176,8 @@ Config.rpt[:bmks][:embed_side_by_side] = {
 Config.bmk_embed_side_by_side = Config.rpt[:bmks][:embed_side_by_side]
 #
 #-------------------
-# Bookmarks partial:  carousel style.
-Config.rpt[:bmks][:carousel] = {
+# Bookmarks partial:  carousel container.
+Config.rpt[:bmks][:carousel_container] = {
   debug_footer:       false
 }
-Config.bmk_carousel = Config.rpt[:bmks][:carousel]
+Config.bmk_carousel_container = Config.rpt[:bmks][:carousel_container]

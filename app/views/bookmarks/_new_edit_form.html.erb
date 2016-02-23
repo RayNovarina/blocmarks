@@ -11,7 +11,14 @@
     <%= f.text_field :url, class: 'form-control', placeholder: 'Enter bookmark url or address' %>
 
     <div class="css-actions">
-      <%= f.submit(props[:bookmark].new_record? ? 'Create Bookmark' : 'Update Bookmark', class: 'btn btn-primary') %>
+      <% if !props[:bookmark].new_record? %>
+        <%= f.submit('Update Bookmark', class: 'btn btn-primary') %>
+        <%= link_to  'Remove', [props[:topic], props[:bookmark]], method: :delete,
+                     class: 'btn btn-danger pull-right',
+                     data: {confirm: 'Are you sure you want to delete this bookmark?'} %>
+      <% else %>
+        <%= f.submit('Create Bookmark', class: 'btn btn-primary') %>
+      <% end %>
     </div>
   <% end %>
 </div>
